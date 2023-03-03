@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<main class="main">
+		<h2 class="mainTitle">Forms</h2>
+		<form class="loginForm">
+			<p class="blockTitle">Authorization</p>
+			<div class="inptBlock inptBlockLogin">
+				<label for="login">Login</label>
+				<input id="login" type="text">
+			</div>
+			<div class="inptBlock inptBlockLogin">
+				<label for="password">Password</label>
+				<input id="password" type="password">
+			</div>
+			<input class="submit" type="submit" value="Submit">
+		</form>
+		<form class="regForm">
+			<p class="blockTitle">Registration</p>
+			<div class="regBlock">
+				<h3 class="regBlock_title">Common:</h3>
+				<div class="inptBlock inptBlockReg">
+					<label for="name">Name</label>
+					<input id="name" type="text">
+					<p>* John</p>
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="surname">Surname</label>
+					<input id="surname" type="text">
+					<p>* Doe</p>
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="">Gender</label>
+					<div class="radioSection">
+						<div class="radioBlock">
+							<input name="gender" id="male" type="radio">
+							<label for="male">Male</label>
+						</div>
+						<div class="radioBlock">
+							<input name="gender" id="female" type="radio">
+							<label for="female">Female</label>
+						</div>
+						<div class="radioBlock">
+							<input name="gender" id="unknow" type="radio">
+							<label for="unknow">Unknow</label>
+						</div>
+					</div>
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="date">Date of birth</label>
+					<input id='date'type="date">
+					<p>* 01/01/1900</p>
+				</div>
+			</div>
+			<div class="regBlock">
+				<h3 class="regBlock_title">Address:</h3>
+				<div class="inptBlock inptBlockReg">
+					<label for="country">Country</label>
+					<select class="inptSelect" name="country" id="country">
+						<option value="">Select</option>
+						<option value="ukraine">Ukraine</option>
+						<option value="poland">Poland</option>
+						<option value="bulgaria">Bulgaria</option>
+						<option value="germany">Germany</option>
+					</select>
+				</div>
+			</div>
+			<div class="regBlock">
+				<h3 class="regBlock_title">Other:</h3>
+				<div class="inptBlock inptBlockReg">
+					<label for="color">Favorite color</label>
+					<input id="color" type="color">
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="maskot">Favorite maskot</label>
+					<select class="inptSelect" name="maskot" id="maskot">
+						<option value="">Select</option>
+						<option value="Benny the Bull">Benny the Bull</option>
+						<option value="Harry the Hawk">Harry the Hawk</option>
+						<option value="Boomer">Boomer</option>
+						<option value="Bango (the Buck)">Bango (the Buck)</option>
+						<option value="Crunch the  Wolf">Crunch the  Wolf</option>
+					</select>
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="pi_input">Choose your height</label>
+					<input id="pi_input" type="range" min="0" max="200" step="any" />
+					<p>Height: <output id="value"></output></p>
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="age">Choose your age</label>
+					<input id="age" type="number" />
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="">Add CV</label>
+					<input id="" type="file" />
+				</div>
+			</div>
+			<div class="regBlock">
+				<h3 class="regBlock_title">Security:</h3>
+				<div class="inptBlock inptBlockReg">
+					<label for="password">Password</label>
+					<input id="password" type="password">
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="repeatPassword">Repeat password</label>
+					<input id="repeatPassword" type="password">
+				</div>
+				<div class="inptBlock inptBlockReg">
+					<label for="email">Email</label>
+					<input id="email" type="email">
+				</div>
+			</div>
+			<div class="regBlock">
+				<h3 class="regBlock_title"> Email subscription:</h3>
+				<div class="inptBlock inptBlockReg">
+					<label for="subscribe">Subscribe to news</label>
+					<input id="subscribe" type="checkbox">
+				</div>
+			</div>
+			<input class="submit" type="submit" value="Register">
+		</form>
+	</main>
+</body>
+<script>
+	const value = document.querySelector("#value");
+	const input = document.querySelector("#pi_input");
+	value.textContent = input.value.split(".")[0]; // set initial value before decimal point
+	input.addEventListener("input", (event) => {
+  value.textContent = event.target.value.split(".")[0]; // update value before decimal point on input change
+});
+</script>
+</html>
