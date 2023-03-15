@@ -96,9 +96,29 @@
     height: 20px;
 }
 #subscribe:checked {
+    position: relative;
     background-color: #007bff;
     border-color: #007bff;
   }
+#subscribe:checked::before {
+    content: '';
+    border: 1px white solid;
+    width: 10px;
+    position: absolute;
+    top: 10px;
+    left: -2px;
+    transform: rotate(60deg);
+}
+#subscribe:checked::after {
+    content: '';
+    border: 1px white solid;
+    width: 15px;
+    position: absolute;
+    top: 8px;
+    right: -3px;
+    transform: rotate(-60deg);
+}
+
 .submit {
     width: 100px;
     height: 30px;
