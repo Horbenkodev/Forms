@@ -99,12 +99,12 @@
     border-radius: 5px;
 }
 
-.color {
+.inptBlockReg > input.color {
     width: 60%;
     height: 30px;
 }
 
-.subscribe {
+.inptBlockReg > input.subscribe {
     appearance: none;
     background-color: #fff;
     border: 2px solid #ddd;
@@ -113,7 +113,7 @@
     height: 20px;
 }
 
-.subscribe:checked {
+.inptBlockReg > input.subscribe:checked {
     position: relative;
     background-color: #007bff;
     border-color: #007bff;
