@@ -99,12 +99,12 @@
     border-radius: 5px;
 }
 
-#color {
+.color {
     width: 60%;
     height: 30px;
 }
 
-#subscribe {
+.subscribe {
     appearance: none;
     background-color: #fff;
     border: 2px solid #ddd;
@@ -113,13 +113,13 @@
     height: 20px;
 }
 
-#subscribe:checked {
+.subscribe:checked {
     position: relative;
     background-color: #007bff;
     border-color: #007bff;
 }
 
-#subscribe:checked::before {
+.subscribe:checked::before {
     content: '';
     border: 1px white solid;
     width: 10px;
@@ -129,7 +129,7 @@
     transform: rotate(60deg);
 }
 
-#subscribe:checked::after {
+.subscribe:checked::after {
     content: '';
     border: 1px white solid;
     width: 15px;
