@@ -10,26 +10,26 @@
     font-size: 40px;
 }
 
+.fieldset {
+    padding: 25px 20px;
+    border: 3px rgb(0, 0, 146) solid;
+    margin: 20px 0;
+}
+.legend {
+  font-size: 18px;
+  padding: 0 5px;
+}
+
 .loginForm, .regForm {
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 3px rgb(0, 0, 146) solid;
-    padding: 25px 20px;
-    width: 20%;
-    margin: 20px 0;
 }
+
+
 
 .regForm {
     width: 50%;
-}
-
-.blockTitle {
-    position: absolute;
-    top: -30px;
-    font-size: 18px;
-    background: white;
-    padding: 0 5px;
 }
 
 .inptBlock {
@@ -42,8 +42,14 @@
     border-bottom: 1px black solid;
 }
 
-.regBlock_title {
-    font-size: 25px;
+.regBlock_fieldset {
+    border: none;
+}
+
+.regBlock_legend {
+  font-size: 1.17em;
+  font-weight: bolder;
+  padding: 20px 0;
 }
 
 .radioSection {
