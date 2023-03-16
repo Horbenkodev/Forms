@@ -4,11 +4,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
+
 .mainTitle {
     font-size: 40px;
 }
+
 .loginForm, .regForm {
     position: relative;
     display: flex;
@@ -18,9 +19,11 @@
     width: 20%;
     margin: 20px 0;
 }
+
 .regForm {
     width: 50%;
 }
+
 .blockTitle {
     position: absolute;
     top: -30px;
@@ -28,24 +31,30 @@
     background: white;
     padding: 0 5px;
 }
+
 .inptBlock {
     display: flex;
     margin: 10px 0;
     align-items: center;
 }
+
 .regBlock {
     border-bottom: 1px black solid;
 }
+
 .regBlock_title {
     font-size: 25px;
 }
+
 .radioSection {
     display: flex;
     flex-direction: column;
 }
+
 .radioBlock > label {
     font-size: 20px;
 }
+
 .radioBlock > input {
     width: 15px;
     height: 15px;
@@ -61,32 +70,40 @@
     border-radius: 5px;
     font-size: 15px;
 }
+
 .inptBlockReg {
     justify-content: center;
 }
+
 .inptBlockReg > input {
     width: 20%;
 }
+
 .inptBlockReg > label {
     position: absolute;
     left: 5%;
 }
+
 .inptBlockReg > p {
     margin: 0 0 0 10px;
 }
+
 .inptBlock > label {
     font-size: 20px;
 }
+
 .inptSelect {
     width: 20%;
     height: 20px;
     font-size: 15px;
     border-radius: 5px;
 }
+
 #color {
     width: 60%;
     height: 30px;
 }
+
 #subscribe {
     appearance: none;
     background-color: #fff;
@@ -95,11 +112,13 @@
     width: 20px;
     height: 20px;
 }
+
 #subscribe:checked {
     position: relative;
     background-color: #007bff;
     border-color: #007bff;
-  }
+}
+
 #subscribe:checked::before {
     content: '';
     border: 1px white solid;
@@ -109,6 +128,7 @@
     left: -2px;
     transform: rotate(60deg);
 }
+
 #subscribe:checked::after {
     content: '';
     border: 1px white solid;
