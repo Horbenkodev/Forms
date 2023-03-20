@@ -1,154 +1,155 @@
 .main {
-    margin: 0 auto;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .mainTitle {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .fieldset {
-    padding: 25px 20px;
-    border: 3px rgb(0, 0, 146) solid;
-    margin: 20px 0;
+  padding: 25px 20px;
+  margin: 20px 0;
+  border: 3px rgb(0 0 146) solid;
 }
+
 .legend {
-  font-size: 18px;
   padding: 0 5px;
+  font-size: 18px;
 }
 
 .loginForm, .regForm {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 
 
 .regForm {
-    width: 50%;
+  width: 50%;
 }
 
 .inptBlock {
-    display: flex;
-    margin: 10px 0;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .regBlock {
-    border-bottom: 1px black solid;
+  border-bottom: 1px black solid;
 }
 
 .regBlock_fieldset {
-    border: none;
+  border: none;
 }
 
 .regBlock_legend {
+  padding: 20px 0;
   font-size: 1.17em;
   font-weight: bolder;
-  padding: 20px 0;
 }
 
 .radioSection {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .radioBlock > label {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .radioBlock > input {
-    width: 15px;
-    height: 15px;
+  width: 15px;
+  height: 15px;
 }
 
 .inptBlockLogin {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .inptBlockLogin > input, .inptBlockReg > input {
-    width: 70%;
-    height: 20px;
-    border-radius: 5px;
-    font-size: 15px;
+  width: 70%;
+  height: 20px;
+  font-size: 15px;
+  border-radius: 5px;
 }
 
 .inptBlockReg {
-    justify-content: center;
+  justify-content: center;
 }
 
 .inptBlockReg > input {
-    width: 20%;
+  width: 20%;
 }
 
 .inptBlockReg > label {
-    position: absolute;
-    left: 5%;
+  position: absolute;
+  left: 5%;
 }
 
 .inptBlockReg > p {
-    margin: 0 0 0 10px;
+  margin: 0 0 0 10px;
 }
 
 .inptBlock > label {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .inptSelect {
-    width: 20%;
-    height: 20px;
-    font-size: 15px;
-    border-radius: 5px;
+  width: 20%;
+  height: 20px;
+  font-size: 15px;
+  border-radius: 5px;
 }
 
 .inptBlockReg > input.color {
-    width: 60%;
-    height: 30px;
+  width: 60%;
+  height: 30px;
 }
 
 .inptBlockReg > input.subscribe {
-    appearance: none;
-    background-color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  appearance: none;
 }
 
 .inptBlockReg > input.subscribe:checked {
-    position: relative;
-    background-color: #007bff;
-    border-color: #007bff;
+  position: relative;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .subscribe:checked::before {
-    content: '';
-    border: 1px white solid;
-    width: 10px;
-    position: absolute;
-    top: 10px;
-    left: -2px;
-    transform: rotate(60deg);
+  position: absolute;
+  top: 10px;
+  left: -2px;
+  width: 10px;
+  content: '';
+  border: 1px white solid;
+  transform: rotate(60deg);
 }
 
 .subscribe:checked::after {
-    content: '';
-    border: 1px white solid;
-    width: 15px;
-    position: absolute;
-    top: 8px;
-    right: -3px;
-    transform: rotate(-60deg);
+  position: absolute;
+  top: 8px;
+  right: -3px;
+  width: 15px;
+  content: '';
+  border: 1px white solid;
+  transform: rotate(-60deg);
 }
 
 .submit {
-    width: 100px;
-    height: 30px;
-    align-self: center;
-    font-size: 15px;
-    margin: 10px 0;
+  align-self: center;
+  width: 100px;
+  height: 30px;
+  margin: 10px 0;
+  font-size: 15px;
 }
