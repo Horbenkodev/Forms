@@ -36333,7 +36333,11 @@ function LoginForm() {
     id: "submit"
   })));
 }
-},{"react":"node_modules/react/index.js","../css/login.css":"src/css/login.css"}],"src/pages/Registration.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../css/login.css":"src/css/login.css"}],"src/css/registration.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/pages/Registration.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36341,6 +36345,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = RegistrationForm;
 var _react = _interopRequireWildcard(require("react"));
+require("../css/registration.css");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -36394,17 +36399,17 @@ function RegistrationForm() {
     console.log(formData);
   };
   return /*#__PURE__*/_react.default.createElement("form", {
-    onSubmit: handleSubmit,
-    style: {
-      width: '50%',
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Registration"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Common:"), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "name",
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between'
-    }
+    className: "regForm",
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "mainFieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", null, "Registration"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "blockFieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "blockFieldset-legend"
+  }, "Common:"), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
+    htmlFor: "name"
   }, "Name", /*#__PURE__*/_react.default.createElement("input", {
     id: "name",
     name: "name",
@@ -36413,11 +36418,8 @@ function RegistrationForm() {
     onChange: handleChange,
     required: true
   }), /*#__PURE__*/_react.default.createElement("div", null, "* John")), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "surname",
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between'
-    }
+    className: "label",
+    htmlFor: "surname"
   }, "Surname", /*#__PURE__*/_react.default.createElement("input", {
     id: "surname",
     name: "surname",
@@ -36426,18 +36428,13 @@ function RegistrationForm() {
     onChange: handleChange,
     required: true
   }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between'
-    }
+    className: "gender"
   }, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "#"
   }, "Gender"), /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column'
-    }
+    className: "gender-radio"
   }, /*#__PURE__*/_react.default.createElement("label", {
+    className: "gender-radio-label",
     htmlFor: "male"
   }, "Male", /*#__PURE__*/_react.default.createElement("input", {
     id: "male",
@@ -36446,6 +36443,7 @@ function RegistrationForm() {
     value: "male",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
+    className: "gender-radio-label",
     htmlFor: "female"
   }, "Female", /*#__PURE__*/_react.default.createElement("input", {
     id: "female",
@@ -36454,6 +36452,7 @@ function RegistrationForm() {
     type: "radio",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
+    className: "gender-radio-label",
     htmlFor: "unknow"
   }, "Unknow", /*#__PURE__*/_react.default.createElement("input", {
     id: "unknow",
@@ -36462,11 +36461,8 @@ function RegistrationForm() {
     type: "radio",
     onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "date",
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between'
-    }
+    className: "label",
+    htmlFor: "date"
   }, "Date of birth", /*#__PURE__*/_react.default.createElement("input", {
     id: "date",
     type: "date",
@@ -36474,7 +36470,12 @@ function RegistrationForm() {
     value: formData.date || '',
     onChange: handleChange,
     required: true
-  }), /*#__PURE__*/_react.default.createElement("div", null, "* 01/01/1900"))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Address:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+  }), /*#__PURE__*/_react.default.createElement("div", null, "* 01/01/1900"))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "blockFieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "blockFieldset-legend"
+  }, "Address:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "country"
   }, "Country", /*#__PURE__*/_react.default.createElement("select", {
     name: "country",
@@ -36491,6 +36492,7 @@ function RegistrationForm() {
   }, "USA"), /*#__PURE__*/_react.default.createElement("option", {
     value: "germany"
   }, "Germany")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "city-add"
   }, "City", /*#__PURE__*/_react.default.createElement("input", {
     list: "city",
@@ -36509,14 +36511,21 @@ function RegistrationForm() {
     value: "Lviv"
   }, "Lviv"), /*#__PURE__*/_react.default.createElement("option", {
     value: "Odessa"
-  }, "Odessa")))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Other:"), /*#__PURE__*/_react.default.createElement("label", {
+  }, "Odessa")))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "blockFieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "blockFieldset-legend"
+  }, "Other:"), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "color"
   }, "Favorite Color", /*#__PURE__*/_react.default.createElement("input", {
+    className: "inputColor",
     id: "color",
     type: "color",
     name: "color",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "maskot"
   }, "Favorite maskot", /*#__PURE__*/_react.default.createElement("select", {
     name: "maskot",
@@ -36535,6 +36544,7 @@ function RegistrationForm() {
   }, "Bango (the Buck)"), /*#__PURE__*/_react.default.createElement("option", {
     value: "Crunch the  Wolf"
   }, "Crunch the  Wolf")))), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "height"
   }, "Choose your height", /*#__PURE__*/_react.default.createElement("input", {
     id: "height",
@@ -36548,6 +36558,7 @@ function RegistrationForm() {
     name: "height",
     value: rangeValue
   }, "Height:", rangeValue)), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "age"
   }, "Choose your age", /*#__PURE__*/_react.default.createElement("input", {
     id: "age",
@@ -36555,13 +36566,19 @@ function RegistrationForm() {
     name: "age",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "addCV"
   }, "Add CV", /*#__PURE__*/_react.default.createElement("input", {
     id: "addCV",
     type: "file",
     name: "file",
     onChange: handleChange
-  })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Security:"), /*#__PURE__*/_react.default.createElement("label", {
+  })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "blockFieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "blockFieldset-legend"
+  }, "Security:"), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "password"
   }, "Password", /*#__PURE__*/_react.default.createElement("input", {
     id: "password",
@@ -36569,6 +36586,7 @@ function RegistrationForm() {
     name: "password",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "repeatPassword"
   }, "Repeat Password", /*#__PURE__*/_react.default.createElement("input", {
     id: "repeatPassword",
@@ -36576,26 +36594,34 @@ function RegistrationForm() {
     name: "repeat password",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    className: "label",
     htmlFor: "email"
   }, "Email", /*#__PURE__*/_react.default.createElement("input", {
     id: "email",
     type: "email",
     name: "email",
     onChange: handleChange
-  }))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Email subscription:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+  }))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "blockFieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", {
+    className: "blockFieldset-legend"
+  }, "Email subscription:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    className: "checkboxLabel",
     htmlFor: "subscribe"
   }, "Subscribe to news", /*#__PURE__*/_react.default.createElement("input", {
+    className: "checkboxLabel-input",
     id: "subscribe",
     type: "checkbox",
     value: !isChecked,
     name: "subscribe",
     onChange: handleCheckboxChange
   }))))), /*#__PURE__*/_react.default.createElement("input", {
+    className: "submit",
     type: "submit",
     value: "Register"
   })));
 }
-},{"react":"node_modules/react/index.js"}],"src/components/App.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../css/registration.css":"src/css/registration.css"}],"src/components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36661,7 +36687,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53961" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57257" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
