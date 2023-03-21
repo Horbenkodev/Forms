@@ -36350,20 +36350,31 @@ function RegistrationForm() {
     _useState4 = _slicedToArray(_useState3, 2),
     rangeValue = _useState4[0],
     setRangeValue = _useState4[1];
-
-  // const handleRangeChange = (e) => {
-  //   setRangeValue(e.target.value);
-  // };
-
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isChecked = _useState6[0],
+    setIsChecked = _useState6[1];
+  var handleCheckbox = function handleCheckbox(e) {
+    setIsChecked(e.target.checked);
+  };
+  var handleCheckboxChange = function handleCheckboxChange(e) {
+    handleCheckbox(e);
+    handleChange(e);
+  };
+  var handleRangeChange = function handleRangeChange(e) {
+    setRangeValue(e.target.value);
+  };
+  var handleInputRange = function handleInputRange(e) {
+    handleRangeChange(e);
+    handleChange(e);
+  };
   var handleChange = function handleChange(e) {
     var name = e.target.name;
     var value = e.target.value;
     setFormData(function (values) {
       return _objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, value));
     });
-    // setRangeValue(e.target.value);
   };
-
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     console.log(formData);
@@ -36518,7 +36529,7 @@ function RegistrationForm() {
     min: 0,
     max: 200,
     name: "height",
-    onChange: handleChange
+    onChange: handleInputRange
   }), /*#__PURE__*/_react.default.createElement("div", {
     name: "height",
     value: rangeValue
@@ -36562,8 +36573,9 @@ function RegistrationForm() {
   }, "Subscribe to news", /*#__PURE__*/_react.default.createElement("input", {
     id: "subscribe",
     type: "checkbox",
+    value: !isChecked,
     name: "subscribe",
-    onChange: handleChange
+    onChange: handleCheckboxChange
   }))))), /*#__PURE__*/_react.default.createElement("input", {
     type: "submit",
     value: "Register"
@@ -36583,6 +36595,8 @@ var _Home = _interopRequireDefault(require("../pages/Home"));
 var _Login = _interopRequireDefault(require("../pages/Login"));
 var _Registration = _interopRequireDefault(require("../pages/Registration"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+/* eslint-disable import/no-extraneous-dependencies */
+
 function App() {
   return /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Routes, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/",

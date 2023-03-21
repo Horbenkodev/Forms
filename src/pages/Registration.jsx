@@ -1,20 +1,36 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({});
   const [rangeValue, setRangeValue] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
 
-  // const handleRangeChange = (e) => {
-  //   setRangeValue(e.target.value);
-  // };
+  const handleCheckbox = (e) => {
+    setIsChecked(e.target.checked);
+  };
+
+  const handleCheckboxChange = (e) => {
+    handleCheckbox(e);
+    handleChange(e);
+  };
+
+  const handleRangeChange = (e) => {
+    setRangeValue(e.target.value);
+  };
+
+  const handleInputRange = (e) => {
+    handleRangeChange(e);
+    handleChange(e);
+  };
 
   const handleChange = (e) => {
     const { name } = e.target;
     const { value } = e.target;
     setFormData((values) => ({ ...values, [name]: value }));
-    // setRangeValue(e.target.value);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -189,7 +205,7 @@ export default function RegistrationForm() {
                 min={0}
                 max={200}
                 name="height"
-                onChange={handleChange}
+                onChange={handleInputRange}
               />
               <div name="height" value={rangeValue}>
                 Height:
@@ -266,8 +282,9 @@ export default function RegistrationForm() {
                 <input
                   id="subscribe"
                   type="checkbox"
+                  value={!isChecked}
                   name="subscribe"
-                  onChange={handleChange}
+                  onChange={handleCheckboxChange}
                 />
               </label>
             </div>
