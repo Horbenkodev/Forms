@@ -41,8 +41,8 @@ export default function LoginForm() {
           />
         </label>
 
-        <InputSection name="Login" id="login" type="text" value={formData.login || ''} onChange={handleChange} />
-        <InputSection name="Password" id="password" type="password" value={formData.password || ''} onChange={handleChange} />
+        {/* <InputSection name="Login" id="login" type="text" value={formData.login || ''} onChange={handleChange} />
+        <InputSection name="Password" id="password" type="password" value={formData.password || ''} onChange={handleChange} /> */}
 
         <input className="submit" type="submit" value="submit" id="submit" />
       </fieldset>
