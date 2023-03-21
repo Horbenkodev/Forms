@@ -29022,10 +29022,47 @@ exports.default = RegistrationForm;
 var _react = _interopRequireWildcard(require("react"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function RegistrationForm() {
+  var _useState = (0, _react.useState)({}),
+    _useState2 = _slicedToArray(_useState, 2),
+    formData = _useState2[0],
+    setFormData = _useState2[1];
+  var _useState3 = (0, _react.useState)(0),
+    _useState4 = _slicedToArray(_useState3, 2),
+    rangeValue = _useState4[0],
+    setRangeValue = _useState4[1];
+
+  // const handleRangeChange = (e) => {
+  //   setRangeValue(e.target.value);
+  // };
+
+  var handleChange = function handleChange(e) {
+    var name = e.target.name;
+    var value = e.target.value;
+    setFormData(function (values) {
+      return _objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, value));
+    });
+    // setRangeValue(e.target.value);
+  };
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    console.log(formData);
+  };
   return /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: handleSubmit,
     style: {
       width: '50%',
       margin: '0 auto'
@@ -29038,7 +29075,10 @@ function RegistrationForm() {
     }
   }, "Name", /*#__PURE__*/_react.default.createElement("input", {
     id: "name",
+    name: "name",
     type: "text",
+    value: formData.name || '',
+    onChange: handleChange,
     required: true
   }), /*#__PURE__*/_react.default.createElement("div", null, "* John")), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "surname",
@@ -29048,7 +29088,10 @@ function RegistrationForm() {
     }
   }, "Surname", /*#__PURE__*/_react.default.createElement("input", {
     id: "surname",
+    name: "surname",
     type: "text",
+    value: formData.surname || '',
+    onChange: handleChange,
     required: true
   }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement("div", {
     style: {
@@ -29067,19 +29110,25 @@ function RegistrationForm() {
   }, "Male", /*#__PURE__*/_react.default.createElement("input", {
     id: "male",
     name: "gender",
-    type: "radio"
+    type: "radio",
+    value: "male",
+    onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "female"
   }, "Female", /*#__PURE__*/_react.default.createElement("input", {
     id: "female",
     name: "gender",
-    type: "radio"
+    value: "female",
+    type: "radio",
+    onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "unknow"
   }, "Unknow", /*#__PURE__*/_react.default.createElement("input", {
     id: "unknow",
     name: "gender",
-    type: "radio"
+    value: "unknow",
+    type: "radio",
+    onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "date",
     style: {
@@ -29089,12 +29138,16 @@ function RegistrationForm() {
   }, "Date of birth", /*#__PURE__*/_react.default.createElement("input", {
     id: "date",
     type: "date",
+    name: "date",
+    value: formData.date || '',
+    onChange: handleChange,
     required: true
   }), /*#__PURE__*/_react.default.createElement("div", null, "* 01/01/1900"))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Address:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "country"
   }, "Country", /*#__PURE__*/_react.default.createElement("select", {
     name: "country",
-    id: "country"
+    id: "country",
+    onChange: handleChange
   }, /*#__PURE__*/_react.default.createElement("option", {
     value: ""
   }, "Select"), /*#__PURE__*/_react.default.createElement("option", {
@@ -29109,7 +29162,9 @@ function RegistrationForm() {
     htmlFor: "city-add"
   }, "City", /*#__PURE__*/_react.default.createElement("input", {
     list: "city",
-    id: "city-add"
+    id: "city-add",
+    name: "city",
+    onChange: handleChange
   }), /*#__PURE__*/_react.default.createElement("datalist", {
     id: "city"
   }, /*#__PURE__*/_react.default.createElement("option", {
@@ -29126,12 +29181,15 @@ function RegistrationForm() {
     htmlFor: "color"
   }, "Favorite Color", /*#__PURE__*/_react.default.createElement("input", {
     id: "color",
-    type: "color"
+    type: "color",
+    name: "color",
+    onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "maskot"
   }, "Favorite maskot", /*#__PURE__*/_react.default.createElement("select", {
     name: "maskot",
-    id: "maskot"
+    id: "maskot",
+    onChange: handleChange
   }, /*#__PURE__*/_react.default.createElement("option", {
     value: ""
   }, "Select"), /*#__PURE__*/_react.default.createElement("option", {
@@ -29149,40 +29207,56 @@ function RegistrationForm() {
   }, "Choose your height", /*#__PURE__*/_react.default.createElement("input", {
     id: "height",
     type: "range",
+    value: rangeValue,
     min: 0,
-    max: 200
-  }), /*#__PURE__*/_react.default.createElement("div", null, "Height:", /*#__PURE__*/_react.default.createElement("output", {
-    id: "heightValue"
-  }))), /*#__PURE__*/_react.default.createElement("label", {
+    max: 200,
+    name: "height",
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    name: "height",
+    value: rangeValue
+  }, "Height:", rangeValue)), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "age"
   }, "Choose your age", /*#__PURE__*/_react.default.createElement("input", {
     id: "age",
-    type: "number"
+    type: "number",
+    name: "age",
+    onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "addCV"
   }, "Add CV", /*#__PURE__*/_react.default.createElement("input", {
     id: "addCV",
-    type: "file"
+    type: "file",
+    name: "file",
+    onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Security:"), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "password"
   }, "Password", /*#__PURE__*/_react.default.createElement("input", {
     id: "password",
-    type: "password"
+    type: "password",
+    name: "password",
+    onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "repeatPassword"
   }, "Repeat Password", /*#__PURE__*/_react.default.createElement("input", {
     id: "repeatPassword",
-    type: "password"
+    type: "password",
+    name: "repeat password",
+    onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "email"
   }, "Email", /*#__PURE__*/_react.default.createElement("input", {
     id: "email",
-    type: "email"
+    type: "email",
+    name: "email",
+    onChange: handleChange
   }))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Email subscription:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "subscribe"
   }, "Subscribe to news", /*#__PURE__*/_react.default.createElement("input", {
     id: "subscribe",
-    type: "checkbox"
+    type: "checkbox",
+    name: "subscribe",
+    onChange: handleChange
   }))))), /*#__PURE__*/_react.default.createElement("input", {
     type: "submit",
     value: "Register"

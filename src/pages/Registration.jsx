@@ -2,10 +2,27 @@
 import React, { useState } from 'react';
 
 export default function RegistrationForm() {
+  const [formData, setFormData] = useState({});
+  const [rangeValue, setRangeValue] = useState(0);
 
+  // const handleRangeChange = (e) => {
+  //   setRangeValue(e.target.value);
+  // };
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    const { value } = e.target;
+    setFormData((values) => ({ ...values, [name]: value }));
+    // setRangeValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
 
   return (
-    <form style={{ width: '50%', margin: '0 auto' }}>
+    <form onSubmit={handleSubmit} style={{ width: '50%', margin: '0 auto' }}>
       <fieldset>
         <legend>Registration</legend>
         <div>
@@ -14,13 +31,27 @@ export default function RegistrationForm() {
 
             <label htmlFor="name" style={{ display: 'flex', justifyContent: 'space-between' }}>
               Name
-              <input id="name" type="text" required />
+              <input
+                id="name"
+                name="name"
+                type="text"
+                value={formData.name || ''}
+                onChange={handleChange}
+                required
+              />
               <div>* John</div>
             </label>
 
             <label htmlFor="surname" style={{ display: 'flex', justifyContent: 'space-between' }}>
               Surname
-              <input id="surname" type="text" required />
+              <input
+                id="surname"
+                name="surname"
+                type="text"
+                value={formData.surname || ''}
+                onChange={handleChange}
+                required
+              />
               <div>* Doe</div>
             </label>
 
@@ -30,17 +61,35 @@ export default function RegistrationForm() {
 
                 <label htmlFor="male">
                   Male
-                  <input id="male" name="gender" type="radio" />
+                  <input
+                    id="male"
+                    name="gender"
+                    type="radio"
+                    value="male"
+                    onChange={handleChange}
+                  />
                 </label>
 
                 <label htmlFor="female">
                   Female
-                  <input id="female" name="gender" type="radio" />
+                  <input
+                    id="female"
+                    name="gender"
+                    value="female"
+                    type="radio"
+                    onChange={handleChange}
+                  />
                 </label>
 
                 <label htmlFor="unknow">
                   Unknow
-                  <input id="unknow" name="gender" type="radio" />
+                  <input
+                    id="unknow"
+                    name="gender"
+                    value="unknow"
+                    type="radio"
+                    onChange={handleChange}
+                  />
                 </label>
               </div>
             </div>
@@ -48,7 +97,14 @@ export default function RegistrationForm() {
             <div>
               <label htmlFor="date" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 Date of birth
-                <input id="date" type="date" required />
+                <input
+                  id="date"
+                  type="date"
+                  name="date"
+                  value={formData.date || ''}
+                  onChange={handleChange}
+                  required
+                />
                 <div>* 01/01/1900</div>
               </label>
             </div>
@@ -61,7 +117,11 @@ export default function RegistrationForm() {
             <div>
               <label htmlFor="country">
                 Country
-                <select name="country" id="country">
+                <select
+                  name="country"
+                  id="country"
+                  onChange={handleChange}
+                >
                   <option value="">Select</option>
                   <option value="ukraine">Ukraine</option>
                   <option value="poland">Poland</option>
@@ -74,7 +134,12 @@ export default function RegistrationForm() {
             <div>
               <label htmlFor="city-add">
                 City
-                <input list="city" id="city-add" />
+                <input
+                  list="city"
+                  id="city-add"
+                  name="city"
+                  onChange={handleChange}
+                />
                 <datalist id="city">
                   <option value="Kherson">Kherson</option>
                   <option value="Dnipro">Dnipro</option>
@@ -93,13 +158,18 @@ export default function RegistrationForm() {
 
             <label htmlFor="color">
               Favorite Color
-              <input id="color" type="color" />
+              <input
+                id="color"
+                type="color"
+                name="color"
+                onChange={handleChange}
+              />
             </label>
 
             <div>
               <label htmlFor="maskot">
                 Favorite maskot
-                <select name="maskot" id="maskot">
+                <select name="maskot" id="maskot" onChange={handleChange}>
                   <option value="">Select</option>
                   <option value="Benny the Bull">Benny the Bull</option>
                   <option value="Harry the Hawk">Harry the Hawk</option>
@@ -112,21 +182,39 @@ export default function RegistrationForm() {
 
             <label htmlFor="height">
               Choose your height
-              <input id="height" type="range" min={0} max={200} />
-              <div>
+              <input
+                id="height"
+                type="range"
+                value={rangeValue}
+                min={0}
+                max={200}
+                name="height"
+                onChange={handleChange}
+              />
+              <div name="height" value={rangeValue}>
                 Height:
-                <output id="heightValue" />
+                { rangeValue }
               </div>
             </label>
 
             <label htmlFor="age">
               Choose your age
-              <input id="age" type="number" />
+              <input
+                id="age"
+                type="number"
+                name="age"
+                onChange={handleChange}
+              />
             </label>
 
             <label htmlFor="addCV">
               Add CV
-              <input id="addCV" type="file" />
+              <input
+                id="addCV"
+                type="file"
+                name="file"
+                onChange={handleChange}
+              />
             </label>
           </fieldset>
         </div>
@@ -137,18 +225,33 @@ export default function RegistrationForm() {
 
             <label htmlFor="password">
               Password
-              <input id="password" type="password" />
+              <input
+                id="password"
+                type="password"
+                name="password"
+                onChange={handleChange}
+              />
             </label>
 
             <label htmlFor="repeatPassword">
               Repeat Password
-              <input id="repeatPassword" type="password" />
+              <input
+                id="repeatPassword"
+                type="password"
+                name="repeat password"
+                onChange={handleChange}
+              />
             </label>
 
             <div>
               <label htmlFor="email">
                 Email
-                <input id="email" type="email" />
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                />
               </label>
             </div>
           </fieldset>
@@ -160,7 +263,12 @@ export default function RegistrationForm() {
             <div>
               <label htmlFor="subscribe">
                 Subscribe to news
-                <input id="subscribe" type="checkbox" />
+                <input
+                  id="subscribe"
+                  type="checkbox"
+                  name="subscribe"
+                  onChange={handleChange}
+                />
               </label>
             </div>
           </fieldset>
