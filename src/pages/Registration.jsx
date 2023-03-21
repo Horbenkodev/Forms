@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
-
 import React, { useState } from 'react';
+import '../css/registration.css';
 
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({});
@@ -37,14 +37,14 @@ export default function RegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: '50%', margin: '0 auto' }}>
-      <fieldset>
+    <form className="regForm" onSubmit={handleSubmit}>
+      <fieldset className="mainFieldset">
         <legend>Registration</legend>
         <div>
-          <fieldset>
-            <legend>Common:</legend>
+          <fieldset className="blockFieldset">
+            <legend className="blockFieldset-legend">Common:</legend>
 
-            <label htmlFor="name" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <label className="label" htmlFor="name">
               Name
               <input
                 id="name"
@@ -57,7 +57,7 @@ export default function RegistrationForm() {
               <div>* John</div>
             </label>
 
-            <label htmlFor="surname" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <label className="label" htmlFor="surname">
               Surname
               <input
                 id="surname"
@@ -70,11 +70,11 @@ export default function RegistrationForm() {
               <div>* Doe</div>
             </label>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="gender">
               <label htmlFor="#">Gender</label>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="gender-radio">
 
-                <label htmlFor="male">
+                <label className="gender-radio-label" htmlFor="male">
                   Male
                   <input
                     id="male"
@@ -85,7 +85,7 @@ export default function RegistrationForm() {
                   />
                 </label>
 
-                <label htmlFor="female">
+                <label className="gender-radio-label" htmlFor="female">
                   Female
                   <input
                     id="female"
@@ -96,7 +96,7 @@ export default function RegistrationForm() {
                   />
                 </label>
 
-                <label htmlFor="unknow">
+                <label className="gender-radio-label" htmlFor="unknow">
                   Unknow
                   <input
                     id="unknow"
@@ -110,7 +110,7 @@ export default function RegistrationForm() {
             </div>
 
             <div>
-              <label htmlFor="date" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <label className="label" htmlFor="date">
                 Date of birth
                 <input
                   id="date"
@@ -126,11 +126,11 @@ export default function RegistrationForm() {
           </fieldset>
         </div>
         <div>
-          <fieldset>
-            <legend>Address:</legend>
+          <fieldset className="blockFieldset">
+            <legend className="blockFieldset-legend">Address:</legend>
 
             <div>
-              <label htmlFor="country">
+              <label className="label" htmlFor="country">
                 Country
                 <select
                   name="country"
@@ -147,7 +147,7 @@ export default function RegistrationForm() {
             </div>
 
             <div>
-              <label htmlFor="city-add">
+              <label className="label" htmlFor="city-add">
                 City
                 <input
                   list="city"
@@ -168,12 +168,13 @@ export default function RegistrationForm() {
         </div>
 
         <div>
-          <fieldset>
-            <legend>Other:</legend>
+          <fieldset className="blockFieldset">
+            <legend className="blockFieldset-legend">Other:</legend>
 
-            <label htmlFor="color">
+            <label className="label" htmlFor="color">
               Favorite Color
               <input
+                className="inputColor"
                 id="color"
                 type="color"
                 name="color"
@@ -182,7 +183,7 @@ export default function RegistrationForm() {
             </label>
 
             <div>
-              <label htmlFor="maskot">
+              <label className="label" htmlFor="maskot">
                 Favorite maskot
                 <select name="maskot" id="maskot" onChange={handleChange}>
                   <option value="">Select</option>
@@ -195,7 +196,7 @@ export default function RegistrationForm() {
               </label>
             </div>
 
-            <label htmlFor="height">
+            <label className="label" htmlFor="height">
               Choose your height
               <input
                 id="height"
@@ -212,7 +213,7 @@ export default function RegistrationForm() {
               </div>
             </label>
 
-            <label htmlFor="age">
+            <label className="label" htmlFor="age">
               Choose your age
               <input
                 id="age"
@@ -222,7 +223,7 @@ export default function RegistrationForm() {
               />
             </label>
 
-            <label htmlFor="addCV">
+            <label className="label" htmlFor="addCV">
               Add CV
               <input
                 id="addCV"
@@ -235,10 +236,10 @@ export default function RegistrationForm() {
         </div>
 
         <div>
-          <fieldset>
-            <legend>Security:</legend>
+          <fieldset className="blockFieldset">
+            <legend className="blockFieldset-legend">Security:</legend>
 
-            <label htmlFor="password">
+            <label className="label" htmlFor="password">
               Password
               <input
                 id="password"
@@ -248,7 +249,7 @@ export default function RegistrationForm() {
               />
             </label>
 
-            <label htmlFor="repeatPassword">
+            <label className="label" htmlFor="repeatPassword">
               Repeat Password
               <input
                 id="repeatPassword"
@@ -259,7 +260,7 @@ export default function RegistrationForm() {
             </label>
 
             <div>
-              <label htmlFor="email">
+              <label className="label" htmlFor="email">
                 Email
                 <input
                   id="email"
@@ -272,13 +273,14 @@ export default function RegistrationForm() {
           </fieldset>
         </div>
         <div>
-          <fieldset>
-            <legend>Email subscription:</legend>
+          <fieldset className="blockFieldset">
+            <legend className="blockFieldset-legend">Email subscription:</legend>
 
             <div>
-              <label htmlFor="subscribe">
+              <label className="checkboxLabel" htmlFor="subscribe">
                 Subscribe to news
                 <input
+                  className="checkboxLabel-input"
                   id="subscribe"
                   type="checkbox"
                   value={!isChecked}
@@ -290,7 +292,7 @@ export default function RegistrationForm() {
           </fieldset>
         </div>
 
-        <input type="submit" value="Register" />
+        <input className="submit" type="submit" value="Register" />
 
       </fieldset>
     </form>
