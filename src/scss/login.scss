@@ -1,0 +1,21 @@
+.loginForm {
+  width: 20%;
+  margin: 0 auto;
+  &-fieldset {
+    display: flex;
+    flex-direction: column;
+    border: 1px black solid;
+    align-items: center;
+  }
+}
+
+.lable {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 5px 0;
+}
+
+.submit {
+  height: 30px;
+  width: 30%;
+}

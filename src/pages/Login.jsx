@@ -1,6 +1,6 @@
-/* eslint jsx-a11y/label-has-associated-control: 0 */
 import React, { useState } from 'react';
-import InputSection from '../components/InputSection';
+// import InputSection from '../components/InputSection';
+import '../css/login.css';
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({});
@@ -17,10 +17,10 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="loginForm" id="loginForm" style={{ width: '300px', margin: '0 auto' }}>
-      <fieldset className="fieldset" style={{ display: 'flex', flexDirection: 'column' }}>
-        <legend className="legend">Authorization</legend>
-        <label htmlFor="login" style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <form onSubmit={handleSubmit} className="loginForm" id="loginForm">
+      <fieldset className="loginForm-fieldset">
+        <legend>Authorization</legend>
+        <label className="lable" htmlFor="login">
           Login
           <input
             id="login"
@@ -30,7 +30,7 @@ export default function LoginForm() {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="password" style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <label className="lable" htmlFor="password">
           Password
           <input
             id="password"
@@ -41,10 +41,22 @@ export default function LoginForm() {
           />
         </label>
 
-        {/* <InputSection name="Login" id="login" type="text" value={formData.login || ''} onChange={handleChange} />
-        <InputSection name="Password" id="password" type="password" value={formData.password || ''} onChange={handleChange} /> */}
+        {/* <InputSection
+          name="Login"
+          id="login"
+          type="text"
+          value={formData.login || ''}
+          onChange={handleChange}
+        />
+        <InputSection
+          name="Password"
+          id="password"
+          type="password"
+          value={formData.password || ''}
+          onChange={handleChange}
+        /> */}
 
-        <input className="submit" type="submit" value="submit" id="submit" />
+        <input className="submit" type="submit" value="Submit" id="submit" />
       </fieldset>
     </form>
   );

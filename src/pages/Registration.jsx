@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React, { useState } from 'react';
 
 export default function RegistrationForm() {
@@ -30,7 +30,6 @@ export default function RegistrationForm() {
     const { value } = e.target;
     setFormData((values) => ({ ...values, [name]: value }));
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();

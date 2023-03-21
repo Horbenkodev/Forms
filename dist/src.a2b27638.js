@@ -36208,31 +36208,62 @@ function Home() {
     href: "/registration"
   }, "Registration"));
 }
-},{"react":"node_modules/react/index.js"}],"src/components/InputSection.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = InputSection;
-var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function InputSection(props) {
-  return /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-around'
-    }
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: props.id
-  }, props.name), /*#__PURE__*/_react.default.createElement("input", {
-    id: props.id,
-    type: props.type,
-    value: props.value,
-    onChange: props.change
-  }));
+},{"react":"node_modules/react/index.js"}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+  return bundleURL;
 }
-},{"react":"node_modules/react/index.js"}],"src/pages/Login.jsx":[function(require,module,exports) {
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+    cssTimeout = null;
+  }, 50);
+}
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/css/login.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/pages/Login.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36240,8 +36271,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = LoginForm;
 var _react = _interopRequireWildcard(require("react"));
-var _InputSection = _interopRequireDefault(require("../components/InputSection"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+require("../css/login.css");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -36275,25 +36305,12 @@ function LoginForm() {
   return /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
     className: "loginForm",
-    id: "loginForm",
-    style: {
-      width: '300px',
-      margin: '0 auto'
-    }
+    id: "loginForm"
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
-    className: "fieldset",
-    style: {
-      display: 'flex',
-      flexDirection: 'column'
-    }
-  }, /*#__PURE__*/_react.default.createElement("legend", {
-    className: "legend"
-  }, "Authorization"), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "login",
-    style: {
-      display: 'flex',
-      justifyContent: 'space-around'
-    }
+    className: "loginForm-fieldset"
+  }, /*#__PURE__*/_react.default.createElement("legend", null, "Authorization"), /*#__PURE__*/_react.default.createElement("label", {
+    className: "lable",
+    htmlFor: "login"
   }, "Login", /*#__PURE__*/_react.default.createElement("input", {
     id: "login",
     name: "login",
@@ -36301,11 +36318,8 @@ function LoginForm() {
     value: formData.login || '',
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "password",
-    style: {
-      display: 'flex',
-      justifyContent: 'space-around'
-    }
+    className: "lable",
+    htmlFor: "password"
   }, "Password", /*#__PURE__*/_react.default.createElement("input", {
     id: "password",
     name: "password",
@@ -36315,11 +36329,11 @@ function LoginForm() {
   })), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
-    value: "submit",
+    value: "Submit",
     id: "submit"
   })));
 }
-},{"react":"node_modules/react/index.js","../components/InputSection":"src/components/InputSection.jsx"}],"src/pages/Registration.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../css/login.css":"src/css/login.css"}],"src/pages/Registration.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
