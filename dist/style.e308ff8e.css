@@ -1,0 +1,157 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.mainTitle {
+  font-size: 40px;
+}
+
+.fieldset {
+  padding: 25px 20px;
+  margin: 20px 0;
+  border: 3px rgb(0 0 146) solid;
+}
+
+.legend {
+  padding: 0 5px;
+  font-size: 18px;
+}
+
+.loginForm, .regForm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.regForm {
+  width: 50%;
+}
+
+.inptBlock {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.regBlock {
+  border-bottom: 1px black solid;
+}
+
+.regBlock_fieldset {
+  border: none;
+}
+
+.regBlock_legend {
+  padding: 20px 0;
+  font-size: 1.17em;
+  font-weight: bolder;
+}
+
+.radioSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioBlock > label {
+  font-size: 20px;
+}
+
+.radioBlock > input {
+  width: 15px;
+  height: 15px;
+}
+
+.inptBlockLogin {
+  justify-content: space-between;
+}
+
+.inptBlockLogin > input, .inptBlockReg > input {
+  width: 70%;
+  height: 20px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.inptBlockReg {
+  justify-content: center;
+}
+
+.inptBlockReg > input {
+  width: 20%;
+}
+
+.inptBlockReg > label {
+  position: absolute;
+  left: 5%;
+}
+
+.inptBlockReg > p {
+  margin: 0 0 0 10px;
+}
+
+.inptBlock > label {
+  font-size: 20px;
+}
+
+.inptSelect {
+  width: 20%;
+  height: 20px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.inptBlockReg > input.color {
+  width: 60%;
+  height: 30px;
+}
+
+.inptBlockReg > input.subscribe {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.inptBlockReg > input.subscribe:checked {
+  position: relative;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.subscribe:checked::before {
+  position: absolute;
+  top: 10px;
+  left: -2px;
+  width: 10px;
+  content: '';
+  border: 1px white solid;
+  transform: rotate(60deg);
+}
+
+.subscribe:checked::after {
+  position: absolute;
+  top: 8px;
+  right: -3px;
+  width: 15px;
+  content: '';
+  border: 1px white solid;
+  transform: rotate(-60deg);
+}
+
+.submit {
+  align-self: center;
+  width: 100px;
+  height: 30px;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
