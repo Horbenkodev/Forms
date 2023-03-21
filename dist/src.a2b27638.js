@@ -28958,7 +28958,8 @@ function LoginForm() {
     className: "loginForm",
     id: "loginForm",
     style: {
-      width: '300px'
+      width: '300px',
+      margin: '0 auto'
     }
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "fieldset",
@@ -28969,7 +28970,11 @@ function LoginForm() {
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "legend"
   }, "Authorization"), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "login"
+    htmlFor: "login",
+    style: {
+      display: 'flex',
+      justifyContent: 'space-around'
+    }
   }, "Login", /*#__PURE__*/_react.default.createElement("input", {
     id: "login",
     name: "login",
@@ -28977,21 +28982,213 @@ function LoginForm() {
     value: formData.login || '',
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "password"
+    htmlFor: "password",
+    style: {
+      display: 'flex',
+      justifyContent: 'space-around'
+    }
   }, "Password", /*#__PURE__*/_react.default.createElement("input", {
     id: "password",
     name: "password",
     type: "password",
     value: formData.password || '',
     onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("input", {
+  })), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    name: "Login",
+    id: "login",
+    type: "text",
+    value: formData.login || '',
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    name: "Password",
+    id: "password",
+    type: "password",
+    value: formData.password || '',
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
     value: "submit",
     id: "submit"
   })));
 }
-},{"react":"node_modules/react/index.js","../components/InputSection":"src/components/InputSection.jsx"}],"src/components/App.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components/InputSection":"src/components/InputSection.jsx"}],"src/pages/Registration.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = RegistrationForm;
+var _react = _interopRequireWildcard(require("react"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
+function RegistrationForm() {
+  return /*#__PURE__*/_react.default.createElement("form", {
+    style: {
+      width: '50%',
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Registration"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Common:"), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "name",
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    }
+  }, "Name", /*#__PURE__*/_react.default.createElement("input", {
+    id: "name",
+    type: "text",
+    required: true
+  }), /*#__PURE__*/_react.default.createElement("div", null, "* John")), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "surname",
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    }
+  }, "Surname", /*#__PURE__*/_react.default.createElement("input", {
+    id: "surname",
+    type: "text",
+    required: true
+  }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    }
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "#"
+  }, "Gender"), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "male"
+  }, "Male", /*#__PURE__*/_react.default.createElement("input", {
+    id: "male",
+    name: "gender",
+    type: "radio"
+  })), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "female"
+  }, "Female", /*#__PURE__*/_react.default.createElement("input", {
+    id: "female",
+    name: "gender",
+    type: "radio"
+  })), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "unknow"
+  }, "Unknow", /*#__PURE__*/_react.default.createElement("input", {
+    id: "unknow",
+    name: "gender",
+    type: "radio"
+  })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "date",
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between'
+    }
+  }, "Date of birth", /*#__PURE__*/_react.default.createElement("input", {
+    id: "date",
+    type: "date",
+    required: true
+  }), /*#__PURE__*/_react.default.createElement("div", null, "* 01/01/1900"))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Address:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "country"
+  }, "Country", /*#__PURE__*/_react.default.createElement("select", {
+    name: "country",
+    id: "country"
+  }, /*#__PURE__*/_react.default.createElement("option", {
+    value: ""
+  }, "Select"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "ukraine"
+  }, "Ukraine"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "poland"
+  }, "Poland"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "usa"
+  }, "USA"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "germany"
+  }, "Germany")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "city-add"
+  }, "City", /*#__PURE__*/_react.default.createElement("input", {
+    list: "city",
+    id: "city-add"
+  }), /*#__PURE__*/_react.default.createElement("datalist", {
+    id: "city"
+  }, /*#__PURE__*/_react.default.createElement("option", {
+    value: "Kherson"
+  }, "Kherson"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Dnipro"
+  }, "Dnipro"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Kyiv"
+  }, "Kyiv"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Lviv"
+  }, "Lviv"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Odessa"
+  }, "Odessa")))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Other:"), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "color"
+  }, "Favorite Color", /*#__PURE__*/_react.default.createElement("input", {
+    id: "color",
+    type: "color"
+  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "maskot"
+  }, "Favorite maskot", /*#__PURE__*/_react.default.createElement("select", {
+    name: "maskot",
+    id: "maskot"
+  }, /*#__PURE__*/_react.default.createElement("option", {
+    value: ""
+  }, "Select"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Benny the Bull"
+  }, "Benny the Bull"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Harry the Hawk"
+  }, "Harry the Hawk"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Boomer"
+  }, "Boomer"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Bango (the Buck)"
+  }, "Bango (the Buck)"), /*#__PURE__*/_react.default.createElement("option", {
+    value: "Crunch the  Wolf"
+  }, "Crunch the  Wolf")))), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "height"
+  }, "Choose your height", /*#__PURE__*/_react.default.createElement("input", {
+    id: "height",
+    type: "range",
+    min: 0,
+    max: 200
+  }), /*#__PURE__*/_react.default.createElement("div", null, "Height:", /*#__PURE__*/_react.default.createElement("output", {
+    id: "heightValue"
+  }))), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "age"
+  }, "Choose your age", /*#__PURE__*/_react.default.createElement("input", {
+    id: "age",
+    type: "number"
+  })), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "addCV"
+  }, "Add CV", /*#__PURE__*/_react.default.createElement("input", {
+    id: "addCV",
+    type: "file"
+  })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Security:"), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "password"
+  }, "Password", /*#__PURE__*/_react.default.createElement("input", {
+    id: "password",
+    type: "password"
+  })), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "repeatPassword"
+  }, "Repeat Password", /*#__PURE__*/_react.default.createElement("input", {
+    id: "repeatPassword",
+    type: "password"
+  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "email"
+  }, "Email", /*#__PURE__*/_react.default.createElement("input", {
+    id: "email",
+    type: "email"
+  }))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", null, "Email subscription:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "subscribe"
+  }, "Subscribe to news", /*#__PURE__*/_react.default.createElement("input", {
+    id: "subscribe",
+    type: "checkbox"
+  }))))), /*#__PURE__*/_react.default.createElement("input", {
+    type: "submit",
+    value: "Register"
+  })));
+}
+},{"react":"node_modules/react/index.js"}],"src/components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29001,13 +29198,14 @@ exports.default = App;
 var _react = _interopRequireDefault(require("react"));
 var _client = _interopRequireDefault(require("react-dom/client"));
 var _Login = _interopRequireDefault(require("../pages/Login"));
+var _Registration = _interopRequireDefault(require("../pages/Registration"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function App() {
-  return /*#__PURE__*/_react.default.createElement(_Login.default, null);
+  return /*#__PURE__*/_react.default.createElement(_Login.default, null), /*#__PURE__*/_react.default.createElement(_Registration.default, null);
 }
 var root = _client.default.createRoot(document.getElementById('root'));
 root.render( /*#__PURE__*/_react.default.createElement(App, null));
-},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","../pages/Login":"src/pages/Login.jsx"}],"src/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom/client":"node_modules/react-dom/client.js","../pages/Login":"src/pages/Login.jsx","../pages/Registration":"src/pages/Registration.jsx"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
