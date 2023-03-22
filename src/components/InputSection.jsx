@@ -1,10 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import '../css/login.css';
 
-export default function InputSection(props) {
+export default function InputSection({
+  id,
+  name,
+  type,
+  value,
+  onChange,
+}) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <label htmlFor={props.id}>{props.name}</label>
-      <input id={props.id} type={props.type} value={props.value} onChange={props.change}/>
-    </div>
+    <label className="lableLogin" htmlFor={id}>
+      {name}
+      <input name={name} id={id} type={type} value={value} onChange={onChange} />
+    </label>
   );
 }
+
+InputSection.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
+InputSection.defaultProps = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
