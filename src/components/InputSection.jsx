@@ -8,12 +8,21 @@ export default function InputSection({
   type,
   value,
   onChange,
-  className,
+  inputClass,
+  labelClass,
+  title,
 }) {
   return (
-    <label className={className} htmlFor={id}>
-      {name}
-      <input name={name} id={id} type={type} value={value} onChange={onChange} />
+    <label className={labelClass} htmlFor={id}>
+      {title}
+      <input
+        className={inputClass}
+        name={name}
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+      />
     </label>
   );
 }
@@ -24,7 +33,10 @@ InputSection.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  className: PropTypes.string,
+  inputClass: PropTypes.string,
+  labelClass: PropTypes.string,
+  title: PropTypes.string,
+
 };
 
 InputSection.defaultProps = {
@@ -33,5 +45,8 @@ InputSection.defaultProps = {
   type: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  className: PropTypes.string,
+  inputClass: PropTypes.string,
+  labelClass: PropTypes.string,
+  title: PropTypes.string,
+
 };
