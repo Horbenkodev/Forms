@@ -25,7 +25,7 @@ export default function LoginForm() {
           type="text"
           value={formData.login || ''}
           onChange={handleChange}
-          className="lableLogin"
+          labelClass="lableLogin"
         />
         <InputSection
           name="password"
@@ -33,7 +33,7 @@ export default function LoginForm() {
           type="password"
           value={formData.password || ''}
           onChange={handleChange}
-          className="lableLogin"
+          labelClass="lableLogin"
         />
 
         <input className="submit" type="submit" value="Submit" id="submit" />

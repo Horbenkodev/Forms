@@ -45,7 +45,7 @@ export default function RegistrationForm() {
           <fieldset className="blockFieldset">
             <legend className="blockFieldset-legend">Common:</legend>
 
-            {/* <label className="label" htmlFor="name">
+            <label className="regLabel" htmlFor="name">
               Name
               <input
                 id="name"
@@ -56,10 +56,9 @@ export default function RegistrationForm() {
                 required
               />
               <div>* John</div>
-            </label> */}
-            <InputSection />
+            </label>
 
-            <label className="label" htmlFor="surname">
+            <label className="regLabel" htmlFor="surname">
               Surname
               <input
                 id="surname"
@@ -73,7 +72,7 @@ export default function RegistrationForm() {
             </label>
 
             <div className="gender">
-              <label htmlFor="#">Gender</label>
+              <label htmlFor="">Gender</label>
               <div className="gender-radio">
 
                 <label className="gender-radio-label" htmlFor="male">
@@ -112,7 +111,7 @@ export default function RegistrationForm() {
             </div>
 
             <div>
-              <label className="label" htmlFor="date">
+              <label className="regLabel" htmlFor="date">
                 Date of birth
                 <input
                   id="date"
@@ -132,7 +131,7 @@ export default function RegistrationForm() {
             <legend className="blockFieldset-legend">Address:</legend>
 
             <div>
-              <label className="label" htmlFor="country">
+              <label className="regLabel" htmlFor="country">
                 Country
                 <select
                   name="country"
@@ -149,7 +148,7 @@ export default function RegistrationForm() {
             </div>
 
             <div>
-              <label className="label" htmlFor="city-add">
+              <label className="regLabel" htmlFor="city-add">
                 City
                 <input
                   list="city"
@@ -173,19 +172,19 @@ export default function RegistrationForm() {
           <fieldset className="blockFieldset">
             <legend className="blockFieldset-legend">Other:</legend>
 
-            <label className="label" htmlFor="color">
-              Favorite Color
-              <input
-                className="inputColor"
-                id="color"
-                type="color"
-                name="color"
-                onChange={handleChange}
-              />
-            </label>
+            <InputSection
+              title="Favorite color"
+              labelClass="regLabel"
+              inputClass="inputColor"
+              id="color"
+              type="color"
+              name="color"
+              value={formData.color || ''}
+              onChange={handleChange}
+            />
 
             <div>
-              <label className="label" htmlFor="maskot">
+              <label className="regLabel" htmlFor="maskot">
                 Favorite maskot
                 <select name="maskot" id="maskot" onChange={handleChange}>
                   <option value="">Select</option>
@@ -198,7 +197,7 @@ export default function RegistrationForm() {
               </label>
             </div>
 
-            <label className="label" htmlFor="height">
+            <label className="regLabel" htmlFor="height">
               Choose your height
               <input
                 id="height"
@@ -215,17 +214,18 @@ export default function RegistrationForm() {
               </div>
             </label>
 
-            <label className="label" htmlFor="age">
+            <label className="regLabel" htmlFor="age">
               Choose your age
               <input
                 id="age"
                 type="number"
                 name="age"
+                min={0}
                 onChange={handleChange}
               />
             </label>
 
-            <label className="label" htmlFor="addCV">
+            <label className="regLabel" htmlFor="addCV">
               Add CV
               <input
                 id="addCV"
@@ -241,37 +241,39 @@ export default function RegistrationForm() {
           <fieldset className="blockFieldset">
             <legend className="blockFieldset-legend">Security:</legend>
 
-            <label className="label" htmlFor="password">
-              Password
-              <input
-                id="password"
-                type="password"
-                name="password"
-                onChange={handleChange}
-              />
-            </label>
+            <InputSection
+              title="Password"
+              labelClass="regLabel"
+              inputClass=""
+              id="password"
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={formData.password || ''}
+            />
 
-            <label className="label" htmlFor="repeatPassword">
-              Repeat Password
-              <input
-                id="repeatPassword"
-                type="password"
-                name="repeat password"
-                onChange={handleChange}
-              />
-            </label>
+            <InputSection
+              title="Repeat password"
+              labelClass="regLabel"
+              inputClass=""
+              id="repeatPassword"
+              type="password"
+              name="repeatpassword"
+              onChange={handleChange}
+              value={formData.repeatpassword || ''}
+            />
 
-            <div>
-              <label className="label" htmlFor="email">
-                Email
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
+            <InputSection
+              title="Email"
+              labelClass="regLabel"
+              inputClass=""
+              id="email"
+              type="email"
+              name="email"
+              onChange={handleChange}
+              value={formData.email || ''}
+            />
+
           </fieldset>
         </div>
         <div>

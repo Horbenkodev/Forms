@@ -37211,11 +37211,14 @@ function InputSection(_ref) {
     type = _ref.type,
     value = _ref.value,
     onChange = _ref.onChange,
-    className = _ref.className;
+    inputClass = _ref.inputClass,
+    labelClass = _ref.labelClass,
+    title = _ref.title;
   return /*#__PURE__*/_react.default.createElement("label", {
-    className: className,
+    className: labelClass,
     htmlFor: id
-  }, name, /*#__PURE__*/_react.default.createElement("input", {
+  }, title, /*#__PURE__*/_react.default.createElement("input", {
+    className: inputClass,
     name: name,
     id: id,
     type: type,
@@ -37229,7 +37232,9 @@ InputSection.propTypes = {
   type: _propTypes.default.string,
   value: _propTypes.default.string,
   onChange: _propTypes.default.func,
-  className: _propTypes.default.string
+  inputClass: _propTypes.default.string,
+  labelClass: _propTypes.default.string,
+  title: _propTypes.default.string
 };
 InputSection.defaultProps = {
   id: _propTypes.default.string,
@@ -37237,7 +37242,9 @@ InputSection.defaultProps = {
   type: _propTypes.default.string,
   value: _propTypes.default.string,
   onChange: _propTypes.default.func,
-  className: _propTypes.default.string
+  inputClass: _propTypes.default.string,
+  labelClass: _propTypes.default.string,
+  title: _propTypes.default.string
 };
 },{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","../css/login.css":"src/css/login.css"}],"src/pages/Login.jsx":[function(require,module,exports) {
 "use strict";
@@ -37293,14 +37300,14 @@ function LoginForm() {
     type: "text",
     value: formData.login || '',
     onChange: handleChange,
-    className: "lableLogin"
+    labelClass: "lableLogin"
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     name: "password",
     id: "password",
     type: "password",
     value: formData.password || '',
     onChange: handleChange,
-    className: "lableLogin"
+    labelClass: "lableLogin"
   }), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
@@ -37384,8 +37391,18 @@ function RegistrationForm() {
     className: "blockFieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
-  }, "Common:"), /*#__PURE__*/_react.default.createElement(_InputSection.default, null), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+  }, "Common:"), /*#__PURE__*/_react.default.createElement("label", {
+    className: "regLabel",
+    htmlFor: "name"
+  }, "Name", /*#__PURE__*/_react.default.createElement("input", {
+    id: "name",
+    name: "name",
+    type: "text",
+    value: formData.name || '',
+    onChange: handleChange,
+    required: true
+  }), /*#__PURE__*/_react.default.createElement("div", null, "* John")), /*#__PURE__*/_react.default.createElement("label", {
+    className: "regLabel",
     htmlFor: "surname"
   }, "Surname", /*#__PURE__*/_react.default.createElement("input", {
     id: "surname",
@@ -37397,7 +37414,7 @@ function RegistrationForm() {
   }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement("div", {
     className: "gender"
   }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: "#"
+    htmlFor: ""
   }, "Gender"), /*#__PURE__*/_react.default.createElement("div", {
     className: "gender-radio"
   }, /*#__PURE__*/_react.default.createElement("label", {
@@ -37428,7 +37445,7 @@ function RegistrationForm() {
     type: "radio",
     onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+    className: "regLabel",
     htmlFor: "date"
   }, "Date of birth", /*#__PURE__*/_react.default.createElement("input", {
     id: "date",
@@ -37442,7 +37459,7 @@ function RegistrationForm() {
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
   }, "Address:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+    className: "regLabel",
     htmlFor: "country"
   }, "Country", /*#__PURE__*/_react.default.createElement("select", {
     name: "country",
@@ -37459,7 +37476,7 @@ function RegistrationForm() {
   }, "USA"), /*#__PURE__*/_react.default.createElement("option", {
     value: "germany"
   }, "Germany")))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+    className: "regLabel",
     htmlFor: "city-add"
   }, "City", /*#__PURE__*/_react.default.createElement("input", {
     list: "city",
@@ -37482,17 +37499,17 @@ function RegistrationForm() {
     className: "blockFieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
-  }, "Other:"), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
-    htmlFor: "color"
-  }, "Favorite Color", /*#__PURE__*/_react.default.createElement("input", {
-    className: "inputColor",
+  }, "Other:"), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    title: "Favorite color",
+    labelClass: "regLabel",
+    inputClass: "inputColor",
     id: "color",
     type: "color",
     name: "color",
+    value: formData.color || '',
     onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+    className: "regLabel",
     htmlFor: "maskot"
   }, "Favorite maskot", /*#__PURE__*/_react.default.createElement("select", {
     name: "maskot",
@@ -37511,7 +37528,7 @@ function RegistrationForm() {
   }, "Bango (the Buck)"), /*#__PURE__*/_react.default.createElement("option", {
     value: "Crunch the  Wolf"
   }, "Crunch the  Wolf")))), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+    className: "regLabel",
     htmlFor: "height"
   }, "Choose your height", /*#__PURE__*/_react.default.createElement("input", {
     id: "height",
@@ -37525,15 +37542,16 @@ function RegistrationForm() {
     name: "height",
     value: rangeValue
   }, "Height:", rangeValue)), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+    className: "regLabel",
     htmlFor: "age"
   }, "Choose your age", /*#__PURE__*/_react.default.createElement("input", {
     id: "age",
     type: "number",
     name: "age",
+    min: 0,
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
+    className: "regLabel",
     htmlFor: "addCV"
   }, "Add CV", /*#__PURE__*/_react.default.createElement("input", {
     id: "addCV",
@@ -37544,31 +37562,34 @@ function RegistrationForm() {
     className: "blockFieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
-  }, "Security:"), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
-    htmlFor: "password"
-  }, "Password", /*#__PURE__*/_react.default.createElement("input", {
+  }, "Security:"), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    title: "Password",
+    labelClass: "regLabel",
+    inputClass: "",
     id: "password",
     type: "password",
     name: "password",
-    onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
-    htmlFor: "repeatPassword"
-  }, "Repeat Password", /*#__PURE__*/_react.default.createElement("input", {
+    onChange: handleChange,
+    value: formData.password || ''
+  }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    title: "Repeat password",
+    labelClass: "regLabel",
+    inputClass: "",
     id: "repeatPassword",
     type: "password",
-    name: "repeat password",
-    onChange: handleChange
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
-    htmlFor: "email"
-  }, "Email", /*#__PURE__*/_react.default.createElement("input", {
+    name: "repeatpassword",
+    onChange: handleChange,
+    value: formData.repeatpassword || ''
+  }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    title: "Email",
+    labelClass: "regLabel",
+    inputClass: "",
     id: "email",
     type: "email",
     name: "email",
-    onChange: handleChange
-  }))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    onChange: handleChange,
+    value: formData.email || ''
+  }))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "blockFieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
