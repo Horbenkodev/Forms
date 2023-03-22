@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
+import InputSection from '../components/InputSection';
 import '../css/registration.css';
 
 export default function RegistrationForm() {
@@ -44,7 +45,7 @@ export default function RegistrationForm() {
           <fieldset className="blockFieldset">
             <legend className="blockFieldset-legend">Common:</legend>
 
-            <label className="label" htmlFor="name">
+            {/* <label className="label" htmlFor="name">
               Name
               <input
                 id="name"
@@ -55,7 +56,8 @@ export default function RegistrationForm() {
                 required
               />
               <div>* John</div>
-            </label>
+            </label> */}
+            <InputSection />
 
             <label className="label" htmlFor="surname">
               Surname

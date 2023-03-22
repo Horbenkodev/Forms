@@ -8,9 +8,10 @@ export default function InputSection({
   type,
   value,
   onChange,
+  className,
 }) {
   return (
-    <label className="lableLogin" htmlFor={id}>
+    <label className={className} htmlFor={id}>
       {name}
       <input name={name} id={id} type={type} value={value} onChange={onChange} />
     </label>
@@ -23,6 +24,7 @@ InputSection.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  className: PropTypes.string,
 };
 
 InputSection.defaultProps = {
@@ -31,4 +33,5 @@ InputSection.defaultProps = {
   type: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  className: PropTypes.string,
 };

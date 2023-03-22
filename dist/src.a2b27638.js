@@ -37210,9 +37210,10 @@ function InputSection(_ref) {
     name = _ref.name,
     type = _ref.type,
     value = _ref.value,
-    onChange = _ref.onChange;
+    onChange = _ref.onChange,
+    className = _ref.className;
   return /*#__PURE__*/_react.default.createElement("label", {
-    className: "lableLogin",
+    className: className,
     htmlFor: id
   }, name, /*#__PURE__*/_react.default.createElement("input", {
     name: name,
@@ -37227,14 +37228,16 @@ InputSection.propTypes = {
   name: _propTypes.default.string,
   type: _propTypes.default.string,
   value: _propTypes.default.string,
-  onChange: _propTypes.default.func
+  onChange: _propTypes.default.func,
+  className: _propTypes.default.string
 };
 InputSection.defaultProps = {
   id: _propTypes.default.string,
   name: _propTypes.default.string,
   type: _propTypes.default.string,
   value: _propTypes.default.string,
-  onChange: _propTypes.default.func
+  onChange: _propTypes.default.func,
+  className: _propTypes.default.string
 };
 },{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","../css/login.css":"src/css/login.css"}],"src/pages/Login.jsx":[function(require,module,exports) {
 "use strict";
@@ -37289,13 +37292,15 @@ function LoginForm() {
     id: "login",
     type: "text",
     value: formData.login || '',
-    onChange: handleChange
+    onChange: handleChange,
+    className: "lableLogin"
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     name: "password",
     id: "password",
     type: "password",
     value: formData.password || '',
-    onChange: handleChange
+    onChange: handleChange,
+    className: "lableLogin"
   }), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
@@ -37315,7 +37320,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = RegistrationForm;
 var _react = _interopRequireWildcard(require("react"));
+var _InputSection = _interopRequireDefault(require("../components/InputSection"));
 require("../css/registration.css");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -37377,17 +37384,7 @@ function RegistrationForm() {
     className: "blockFieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
-  }, "Common:"), /*#__PURE__*/_react.default.createElement("label", {
-    className: "label",
-    htmlFor: "name"
-  }, "Name", /*#__PURE__*/_react.default.createElement("input", {
-    id: "name",
-    name: "name",
-    type: "text",
-    value: formData.name || '',
-    onChange: handleChange,
-    required: true
-  }), /*#__PURE__*/_react.default.createElement("div", null, "* John")), /*#__PURE__*/_react.default.createElement("label", {
+  }, "Common:"), /*#__PURE__*/_react.default.createElement(_InputSection.default, null), /*#__PURE__*/_react.default.createElement("label", {
     className: "label",
     htmlFor: "surname"
   }, "Surname", /*#__PURE__*/_react.default.createElement("input", {
@@ -37591,7 +37588,7 @@ function RegistrationForm() {
     value: "Register"
   })));
 }
-},{"react":"node_modules/react/index.js","../css/registration.css":"src/css/registration.css"}],"src/components/App.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components/InputSection":"src/components/InputSection.jsx","../css/registration.css":"src/css/registration.css"}],"src/components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
