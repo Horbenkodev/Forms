@@ -9,10 +9,11 @@
   }
 }
 
-.lable {
+.lableLogin {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 5px 0;
+  text-transform: capitalize;
 }
 
 .submit {
