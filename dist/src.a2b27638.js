@@ -37211,7 +37211,8 @@ function InputSection(_ref) {
     type = _ref.type,
     value = _ref.value,
     onChange = _ref.onChange,
-    inputClass = _ref.inputClass,
+    _ref$inputClass = _ref.inputClass,
+    inputClass = _ref$inputClass === void 0 ? '' : _ref$inputClass,
     labelClass = _ref.labelClass,
     title = _ref.title;
   return /*#__PURE__*/_react.default.createElement("label", {
@@ -37345,37 +37346,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function RegistrationForm() {
-  var _useState = (0, _react.useState)({}),
+  var _useState = (0, _react.useState)({
+      height: 0
+    }),
     _useState2 = _slicedToArray(_useState, 2),
     formData = _useState2[0],
     setFormData = _useState2[1];
-  var _useState3 = (0, _react.useState)(0),
-    _useState4 = _slicedToArray(_useState3, 2),
-    rangeValue = _useState4[0],
-    setRangeValue = _useState4[1];
-  var _useState5 = (0, _react.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    isChecked = _useState6[0],
-    setIsChecked = _useState6[1];
-  var handleCheckbox = function handleCheckbox(e) {
-    setIsChecked(e.target.checked);
-  };
-  var handleCheckboxChange = function handleCheckboxChange(e) {
-    handleCheckbox(e);
-    handleChange(e);
-  };
-  var handleRangeChange = function handleRangeChange(e) {
-    setRangeValue(e.target.value);
-  };
-  var handleInputRange = function handleInputRange(e) {
-    handleRangeChange(e);
-    handleChange(e);
-  };
   var handleChange = function handleChange(e) {
-    var name = e.target.name;
-    var value = e.target.value;
+    var _e$target = e.target,
+      name = _e$target.name,
+      value = _e$target.value,
+      type = _e$target.type;
+    var stateValue = type === 'checkbox' ? e.target.checked : value;
     setFormData(function (values) {
-      return _objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, value));
+      return _objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, stateValue));
     });
   };
   var handleSubmit = function handleSubmit(e) {
@@ -37413,9 +37397,7 @@ function RegistrationForm() {
     required: true
   }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement("div", {
     className: "gender"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    htmlFor: ""
-  }, "Gender"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, "Gender"), /*#__PURE__*/_react.default.createElement("div", {
     className: "gender-radio"
   }, /*#__PURE__*/_react.default.createElement("label", {
     className: "gender-radio-label",
@@ -37533,15 +37515,12 @@ function RegistrationForm() {
   }, "Choose your height", /*#__PURE__*/_react.default.createElement("input", {
     id: "height",
     type: "range",
-    value: rangeValue,
+    value: formData.height,
     min: 0,
     max: 200,
     name: "height",
-    onChange: handleInputRange
-  }), /*#__PURE__*/_react.default.createElement("div", {
-    name: "height",
-    value: rangeValue
-  }, "Height:", rangeValue)), /*#__PURE__*/_react.default.createElement("label", {
+    onChange: handleChange
+  }), /*#__PURE__*/_react.default.createElement("div", null, "Height:", formData.height)), /*#__PURE__*/_react.default.createElement("label", {
     className: "regLabel",
     htmlFor: "age"
   }, "Choose your age", /*#__PURE__*/_react.default.createElement("input", {
@@ -37565,7 +37544,6 @@ function RegistrationForm() {
   }, "Security:"), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     title: "Password",
     labelClass: "regLabel",
-    inputClass: "",
     id: "password",
     type: "password",
     name: "password",
@@ -37574,7 +37552,6 @@ function RegistrationForm() {
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     title: "Repeat password",
     labelClass: "regLabel",
-    inputClass: "",
     id: "repeatPassword",
     type: "password",
     name: "repeatpassword",
@@ -37583,7 +37560,6 @@ function RegistrationForm() {
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     title: "Email",
     labelClass: "regLabel",
-    inputClass: "",
     id: "email",
     type: "email",
     name: "email",
@@ -37593,17 +37569,16 @@ function RegistrationForm() {
     className: "blockFieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", {
     className: "blockFieldset-legend"
-  }, "Email subscription:"), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+  }, "Email subscription:"), /*#__PURE__*/_react.default.createElement("label", {
     className: "checkboxLabel",
     htmlFor: "subscribe"
   }, "Subscribe to news", /*#__PURE__*/_react.default.createElement("input", {
     className: "checkboxLabel-input",
     id: "subscribe",
     type: "checkbox",
-    value: !isChecked,
     name: "subscribe",
-    onChange: handleCheckboxChange
-  }))))), /*#__PURE__*/_react.default.createElement("input", {
+    onChange: handleChange
+  })))), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
     value: "Register"

@@ -1,35 +1,14 @@
-/* eslint-disable no-use-before-define */
 import React, { useState } from 'react';
 import InputSection from '../components/InputSection';
 import '../css/registration.css';
 
 export default function RegistrationForm() {
-  const [formData, setFormData] = useState({});
-  const [rangeValue, setRangeValue] = useState(0);
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckbox = (e) => {
-    setIsChecked(e.target.checked);
-  };
-
-  const handleCheckboxChange = (e) => {
-    handleCheckbox(e);
-    handleChange(e);
-  };
-
-  const handleRangeChange = (e) => {
-    setRangeValue(e.target.value);
-  };
-
-  const handleInputRange = (e) => {
-    handleRangeChange(e);
-    handleChange(e);
-  };
+  const [formData, setFormData] = useState({ height: 0 });
 
   const handleChange = (e) => {
-    const { name } = e.target;
-    const { value } = e.target;
-    setFormData((values) => ({ ...values, [name]: value }));
+    const { name, value, type } = e.target;
+    const stateValue = type === 'checkbox' ? e.target.checked : value;
+    setFormData((values) => ({ ...values, [name]: stateValue }));
   };
 
   const handleSubmit = (e) => {
@@ -72,7 +51,7 @@ export default function RegistrationForm() {
             </label>
 
             <div className="gender">
-              <label htmlFor="">Gender</label>
+              <div>Gender</div>
               <div className="gender-radio">
 
                 <label className="gender-radio-label" htmlFor="male">
@@ -202,15 +181,15 @@ export default function RegistrationForm() {
               <input
                 id="height"
                 type="range"
-                value={rangeValue}
+                value={formData.height}
                 min={0}
                 max={200}
                 name="height"
-                onChange={handleInputRange}
+                onChange={handleChange}
               />
-              <div name="height" value={rangeValue}>
+              <div>
                 Height:
-                { rangeValue }
+                { formData.height }
               </div>
             </label>
 
@@ -244,7 +223,6 @@ export default function RegistrationForm() {
             <InputSection
               title="Password"
               labelClass="regLabel"
-              inputClass=""
               id="password"
               type="password"
               name="password"
@@ -255,7 +233,6 @@ export default function RegistrationForm() {
             <InputSection
               title="Repeat password"
               labelClass="regLabel"
-              inputClass=""
               id="repeatPassword"
               type="password"
               name="repeatpassword"
@@ -266,7 +243,6 @@ export default function RegistrationForm() {
             <InputSection
               title="Email"
               labelClass="regLabel"
-              inputClass=""
               id="email"
               type="email"
               name="email"
@@ -280,19 +256,16 @@ export default function RegistrationForm() {
           <fieldset className="blockFieldset">
             <legend className="blockFieldset-legend">Email subscription:</legend>
 
-            <div>
-              <label className="checkboxLabel" htmlFor="subscribe">
-                Subscribe to news
-                <input
-                  className="checkboxLabel-input"
-                  id="subscribe"
-                  type="checkbox"
-                  value={!isChecked}
-                  name="subscribe"
-                  onChange={handleCheckboxChange}
-                />
-              </label>
-            </div>
+            <label className="checkboxLabel" htmlFor="subscribe">
+              Subscribe to news
+              <input
+                className="checkboxLabel-input"
+                id="subscribe"
+                type="checkbox"
+                name="subscribe"
+                onChange={handleChange}
+              />
+            </label>
           </fieldset>
         </div>
 

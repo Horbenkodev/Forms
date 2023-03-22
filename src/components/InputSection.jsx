@@ -8,7 +8,7 @@ export default function InputSection({
   type,
   value,
   onChange,
-  inputClass,
+  inputClass = '',
   labelClass,
   title,
 }) {
@@ -36,7 +36,6 @@ InputSection.propTypes = {
   inputClass: PropTypes.string,
   labelClass: PropTypes.string,
   title: PropTypes.string,
-
 };
 
 InputSection.defaultProps = {
@@ -48,5 +47,4 @@ InputSection.defaultProps = {
   inputClass: PropTypes.string,
   labelClass: PropTypes.string,
   title: PropTypes.string,
-
 };
