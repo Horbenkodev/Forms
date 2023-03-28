@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputSection from '../components/InputSection';
 import '../css/login.css';
+
+const LOGIN_FORM_STORAGE_KEY = 'formData';
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({});
@@ -10,9 +12,21 @@ export default function LoginForm() {
     setFormData((values) => ({ ...values, [name]: value }));
   };
 
+  useEffect(() => {
+    const storageFormDataLogin = sessionStorage.getItem(LOGIN_FORM_STORAGE_KEY);
+
+    if (storageFormDataLogin) {
+      setFormData(JSON.parse(storageFormDataLogin));
+    }
+    return false;
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const serializedLogin = JSON.stringify(formData);
+
+    console.log(JSON.parse(serializedLogin));
+    sessionStorage.setItem(LOGIN_FORM_STORAGE_KEY, serializedLogin);
   };
 
   return (
@@ -20,20 +34,24 @@ export default function LoginForm() {
       <fieldset className="loginForm-fieldset">
         <legend>Authorization</legend>
         <InputSection
+          title="Login"
           name="login"
           id="login"
           type="text"
           value={formData.login || ''}
           onChange={handleChange}
           labelClass="lableLogin"
+          inputClass=""
         />
         <InputSection
+          title="Password"
           name="password"
           id="password"
           type="password"
           value={formData.password || ''}
           onChange={handleChange}
           labelClass="lableLogin"
+          inputClass=""
         />
 
         <input className="submit" type="submit" value="Submit" id="submit" />

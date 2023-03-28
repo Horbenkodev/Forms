@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputSection from '../components/InputSection';
 import '../css/registration.css';
 
+const REGISTRATION_FORM_STORAGE_KEY = 'formData';
+
 export default function RegistrationForm() {
-  const [formData, setFormData] = useState({ height: 0 });
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    const storageFormDataReg = sessionStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
+
+    if (storageFormDataReg) {
+      setFormData(JSON.parse(storageFormDataReg));
+    }
+
+    return false;
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     const stateValue = type === 'checkbox' ? e.target.checked : value;
+
     setFormData((values) => ({ ...values, [name]: stateValue }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const serializedReg = JSON.stringify(formData);
+
+    console.log(JSON.parse(serializedReg));
+    sessionStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
   };
 
   return (
@@ -61,6 +77,7 @@ export default function RegistrationForm() {
                     name="gender"
                     type="radio"
                     value="male"
+                    checked={formData.gender === 'male'}
                     onChange={handleChange}
                   />
                 </label>
@@ -72,6 +89,7 @@ export default function RegistrationForm() {
                     name="gender"
                     value="female"
                     type="radio"
+                    checked={formData.gender === 'female'}
                     onChange={handleChange}
                   />
                 </label>
@@ -83,6 +101,7 @@ export default function RegistrationForm() {
                     name="gender"
                     value="unknow"
                     type="radio"
+                    checked={formData.gender === 'unknow'}
                     onChange={handleChange}
                   />
                 </label>
@@ -113,11 +132,12 @@ export default function RegistrationForm() {
               <label className="regLabel" htmlFor="country">
                 Country
                 <select
+                  value={formData.country || ''}
                   name="country"
                   id="country"
                   onChange={handleChange}
                 >
-                  <option value="">Select</option>
+                  <option value="select">Select</option>
                   <option value="ukraine">Ukraine</option>
                   <option value="poland">Poland</option>
                   <option value="usa">USA</option>
@@ -130,6 +150,7 @@ export default function RegistrationForm() {
               <label className="regLabel" htmlFor="city-add">
                 City
                 <input
+                  value={formData.city || ''}
                   list="city"
                   id="city-add"
                   name="city"
@@ -165,7 +186,12 @@ export default function RegistrationForm() {
             <div>
               <label className="regLabel" htmlFor="maskot">
                 Favorite maskot
-                <select name="maskot" id="maskot" onChange={handleChange}>
+                <select
+                  value={formData.maskot || ''}
+                  name="maskot"
+                  id="maskot"
+                  onChange={handleChange}
+                >
                   <option value="">Select</option>
                   <option value="Benny the Bull">Benny the Bull</option>
                   <option value="Harry the Hawk">Harry the Hawk</option>
@@ -181,7 +207,7 @@ export default function RegistrationForm() {
               <input
                 id="height"
                 type="range"
-                value={formData.height}
+                value={formData.height || 0}
                 min={0}
                 max={200}
                 name="height"
@@ -189,17 +215,19 @@ export default function RegistrationForm() {
               />
               <div>
                 Height:
-                { formData.height }
+                { formData.height || 0}
               </div>
             </label>
 
             <label className="regLabel" htmlFor="age">
               Choose your age
               <input
+                value={formData.age || ''}
                 id="age"
                 type="number"
                 name="age"
                 min={0}
+                max={200}
                 onChange={handleChange}
               />
             </label>
@@ -222,6 +250,7 @@ export default function RegistrationForm() {
 
             <InputSection
               title="Password"
+              inputClass=""
               labelClass="regLabel"
               id="password"
               type="password"
@@ -232,6 +261,7 @@ export default function RegistrationForm() {
 
             <InputSection
               title="Repeat password"
+              inputClass=""
               labelClass="regLabel"
               id="repeatPassword"
               type="password"
@@ -242,6 +272,7 @@ export default function RegistrationForm() {
 
             <InputSection
               title="Email"
+              inputClass=""
               labelClass="regLabel"
               id="email"
               type="email"
@@ -263,6 +294,7 @@ export default function RegistrationForm() {
                 id="subscribe"
                 type="checkbox"
                 name="subscribe"
+                checked={formData.subscribe}
                 onChange={handleChange}
               />
             </label>

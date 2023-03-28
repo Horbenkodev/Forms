@@ -37272,6 +37272,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var LOGIN_FORM_STORAGE_KEY = 'formData';
 function LoginForm() {
   var _useState = (0, _react.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
@@ -37285,9 +37286,18 @@ function LoginForm() {
       return _objectSpread(_objectSpread({}, values), {}, _defineProperty({}, name, value));
     });
   };
+  (0, _react.useEffect)(function () {
+    var storageFormDataLogin = sessionStorage.getItem(LOGIN_FORM_STORAGE_KEY);
+    if (storageFormDataLogin) {
+      setFormData(JSON.parse(storageFormDataLogin));
+    }
+    return false;
+  }, []);
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
+    var serializedLogin = JSON.stringify(formData);
+    console.log(JSON.parse(serializedLogin));
+    sessionStorage.setItem(LOGIN_FORM_STORAGE_KEY, serializedLogin);
   };
   return /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
@@ -37296,19 +37306,23 @@ function LoginForm() {
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "loginForm-fieldset"
   }, /*#__PURE__*/_react.default.createElement("legend", null, "Authorization"), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    title: "Login",
     name: "login",
     id: "login",
     type: "text",
     value: formData.login || '',
     onChange: handleChange,
-    labelClass: "lableLogin"
+    labelClass: "lableLogin",
+    inputClass: ""
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
+    title: "Password",
     name: "password",
     id: "password",
     type: "password",
     value: formData.password || '',
     onChange: handleChange,
-    labelClass: "lableLogin"
+    labelClass: "lableLogin",
+    inputClass: ""
   }), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
@@ -37345,13 +37359,19 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var REGISTRATION_FORM_STORAGE_KEY = 'formData';
 function RegistrationForm() {
-  var _useState = (0, _react.useState)({
-      height: 0
-    }),
+  var _useState = (0, _react.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     formData = _useState2[0],
     setFormData = _useState2[1];
+  (0, _react.useEffect)(function () {
+    var storageFormDataReg = sessionStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
+    if (storageFormDataReg) {
+      setFormData(JSON.parse(storageFormDataReg));
+    }
+    return false;
+  }, []);
   var handleChange = function handleChange(e) {
     var _e$target = e.target,
       name = _e$target.name,
@@ -37364,7 +37384,9 @@ function RegistrationForm() {
   };
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
+    var serializedReg = JSON.stringify(formData);
+    console.log(JSON.parse(serializedReg));
+    sessionStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
   };
   return /*#__PURE__*/_react.default.createElement("form", {
     className: "regForm",
@@ -37407,6 +37429,7 @@ function RegistrationForm() {
     name: "gender",
     type: "radio",
     value: "male",
+    checked: formData.gender === 'male',
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     className: "gender-radio-label",
@@ -37416,6 +37439,7 @@ function RegistrationForm() {
     name: "gender",
     value: "female",
     type: "radio",
+    checked: formData.gender === 'female',
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     className: "gender-radio-label",
@@ -37425,6 +37449,7 @@ function RegistrationForm() {
     name: "gender",
     value: "unknow",
     type: "radio",
+    checked: formData.gender === 'unknow',
     onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     className: "regLabel",
@@ -37444,11 +37469,12 @@ function RegistrationForm() {
     className: "regLabel",
     htmlFor: "country"
   }, "Country", /*#__PURE__*/_react.default.createElement("select", {
+    value: formData.country || '',
     name: "country",
     id: "country",
     onChange: handleChange
   }, /*#__PURE__*/_react.default.createElement("option", {
-    value: ""
+    value: "select"
   }, "Select"), /*#__PURE__*/_react.default.createElement("option", {
     value: "ukraine"
   }, "Ukraine"), /*#__PURE__*/_react.default.createElement("option", {
@@ -37461,6 +37487,7 @@ function RegistrationForm() {
     className: "regLabel",
     htmlFor: "city-add"
   }, "City", /*#__PURE__*/_react.default.createElement("input", {
+    value: formData.city || '',
     list: "city",
     id: "city-add",
     name: "city",
@@ -37494,6 +37521,7 @@ function RegistrationForm() {
     className: "regLabel",
     htmlFor: "maskot"
   }, "Favorite maskot", /*#__PURE__*/_react.default.createElement("select", {
+    value: formData.maskot || '',
     name: "maskot",
     id: "maskot",
     onChange: handleChange
@@ -37515,19 +37543,21 @@ function RegistrationForm() {
   }, "Choose your height", /*#__PURE__*/_react.default.createElement("input", {
     id: "height",
     type: "range",
-    value: formData.height,
+    value: formData.height || 0,
     min: 0,
     max: 200,
     name: "height",
     onChange: handleChange
-  }), /*#__PURE__*/_react.default.createElement("div", null, "Height:", formData.height)), /*#__PURE__*/_react.default.createElement("label", {
+  }), /*#__PURE__*/_react.default.createElement("div", null, "Height:", formData.height || 0)), /*#__PURE__*/_react.default.createElement("label", {
     className: "regLabel",
     htmlFor: "age"
   }, "Choose your age", /*#__PURE__*/_react.default.createElement("input", {
+    value: formData.age || '',
     id: "age",
     type: "number",
     name: "age",
     min: 0,
+    max: 200,
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("label", {
     className: "regLabel",
@@ -37543,6 +37573,7 @@ function RegistrationForm() {
     className: "blockFieldset-legend"
   }, "Security:"), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     title: "Password",
+    inputClass: "",
     labelClass: "regLabel",
     id: "password",
     type: "password",
@@ -37551,6 +37582,7 @@ function RegistrationForm() {
     value: formData.password || ''
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     title: "Repeat password",
+    inputClass: "",
     labelClass: "regLabel",
     id: "repeatPassword",
     type: "password",
@@ -37559,6 +37591,7 @@ function RegistrationForm() {
     value: formData.repeatpassword || ''
   }), /*#__PURE__*/_react.default.createElement(_InputSection.default, {
     title: "Email",
+    inputClass: "",
     labelClass: "regLabel",
     id: "email",
     type: "email",
@@ -37577,6 +37610,7 @@ function RegistrationForm() {
     id: "subscribe",
     type: "checkbox",
     name: "subscribe",
+    checked: formData.subscribe,
     onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
@@ -37650,7 +37684,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64375" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49257" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
