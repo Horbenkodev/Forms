@@ -2,22 +2,21 @@
   width: 20%;
   margin: 0 auto;
 }
+
 .loginForm-fieldset {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
           flex-direction: column;
-  border: 1px black solid;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border: 1px black solid;
 }
 
 .lableLogin {
-  display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -26,8 +25,8 @@
 }
 
 .submit {
-  height: 30px;
   width: 30%;
+  height: 30px;
 }
 .regForm {
   width: 50%;
@@ -35,14 +34,13 @@
 }
 
 .mainFieldset {
-  border: 1px black solid;
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
           flex-direction: column;
+  border: 1px black solid;
 }
 
 .blockFieldset {
@@ -50,13 +48,13 @@
   border: none;
   border-bottom: 2px black solid;
 }
+
 .blockFieldset-legend {
   font-size: 20px;
   font-weight: bold;
 }
 
 .regLabel {
-  display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
@@ -65,9 +63,10 @@
 
 .checkboxLabel {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
 }
+
 .checkboxLabel-input {
   width: 15px;
   height: 15px;
@@ -78,15 +77,14 @@
 }
 
 .submit {
-  height: 30px;
-  width: 30%;
   -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
+      grid-row-align: center;
       align-self: center;
+  width: 30%;
+  height: 30px;
 }
 
 .gender {
-  display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
@@ -95,17 +93,17 @@
           align-items: center;
   margin: 20px 0;
 }
+
 .gender-radio {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
           flex-direction: column;
 }
+
 .gender-radio-label {
-  display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;

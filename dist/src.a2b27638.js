@@ -37287,17 +37287,16 @@ function LoginForm() {
     });
   };
   (0, _react.useEffect)(function () {
-    var storageFormDataLogin = sessionStorage.getItem(LOGIN_FORM_STORAGE_KEY);
+    var storageFormDataLogin = localStorage.getItem(LOGIN_FORM_STORAGE_KEY);
     if (storageFormDataLogin) {
       setFormData(JSON.parse(storageFormDataLogin));
     }
-    return false;
   }, []);
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var serializedLogin = JSON.stringify(formData);
     console.log(JSON.parse(serializedLogin));
-    sessionStorage.setItem(LOGIN_FORM_STORAGE_KEY, serializedLogin);
+    localStorage.setItem(LOGIN_FORM_STORAGE_KEY, serializedLogin);
   };
   return /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: handleSubmit,
@@ -37366,11 +37365,10 @@ function RegistrationForm() {
     formData = _useState2[0],
     setFormData = _useState2[1];
   (0, _react.useEffect)(function () {
-    var storageFormDataReg = sessionStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
+    var storageFormDataReg = localStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
     if (storageFormDataReg) {
       setFormData(JSON.parse(storageFormDataReg));
     }
-    return false;
   }, []);
   var handleChange = function handleChange(e) {
     var _e$target = e.target,
@@ -37386,7 +37384,7 @@ function RegistrationForm() {
     e.preventDefault();
     var serializedReg = JSON.stringify(formData);
     console.log(JSON.parse(serializedReg));
-    sessionStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
+    localStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
   };
   return /*#__PURE__*/_react.default.createElement("form", {
     className: "regForm",
@@ -37515,7 +37513,7 @@ function RegistrationForm() {
     id: "color",
     type: "color",
     name: "color",
-    value: formData.color || '',
+    value: formData.color || '#000000',
     onChange: handleChange
   }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
     className: "regLabel",
@@ -37610,7 +37608,7 @@ function RegistrationForm() {
     id: "subscribe",
     type: "checkbox",
     name: "subscribe",
-    checked: formData.subscribe,
+    checked: formData.subscribe || false,
     onChange: handleChange
   })))), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
@@ -37684,7 +37682,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49257" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49358" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

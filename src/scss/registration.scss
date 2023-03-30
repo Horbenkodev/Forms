@@ -4,15 +4,16 @@
 }
 
 .mainFieldset {
-  border: 1px black solid;
   display: flex;
   flex-direction: column;
+  border: 1px black solid;
 }
 
 .blockFieldset {
   margin: 20px 0;
   border: none;
   border-bottom: 2px black solid;
+
   &-legend {
     font-size: 20px;
     font-weight: bold;
@@ -27,6 +28,7 @@
 
 .checkboxLabel {
   display: flex;
+
   &-input {
     width: 15px;
     height: 15px;
@@ -38,9 +40,9 @@
 }
 
 .submit {
-  height: 30px;
-  width: 30%;
   align-self: center;
+  width: 30%;
+  height: 30px;
 }
 
 .gender {
@@ -48,9 +50,11 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   margin: 20px 0;
+
   &-radio {
     display: flex;
     flex-direction: column;
+
     &-label {
       display: grid;
       grid-template-columns: 1fr 1fr;

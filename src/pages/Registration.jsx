@@ -8,13 +8,11 @@ export default function RegistrationForm() {
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
-    const storageFormDataReg = sessionStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
+    const storageFormDataReg = localStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
 
     if (storageFormDataReg) {
       setFormData(JSON.parse(storageFormDataReg));
     }
-
-    return false;
   }, []);
 
   const handleChange = (e) => {
@@ -29,7 +27,7 @@ export default function RegistrationForm() {
     const serializedReg = JSON.stringify(formData);
 
     console.log(JSON.parse(serializedReg));
-    sessionStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
+    localStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
   };
 
   return (
@@ -179,7 +177,7 @@ export default function RegistrationForm() {
               id="color"
               type="color"
               name="color"
-              value={formData.color || ''}
+              value={formData.color || '#000000'}
               onChange={handleChange}
             />
 
@@ -294,7 +292,7 @@ export default function RegistrationForm() {
                 id="subscribe"
                 type="checkbox"
                 name="subscribe"
-                checked={formData.subscribe}
+                checked={formData.subscribe || false}
                 onChange={handleChange}
               />
             </label>

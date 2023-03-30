@@ -13,12 +13,11 @@ export default function LoginForm() {
   };
 
   useEffect(() => {
-    const storageFormDataLogin = sessionStorage.getItem(LOGIN_FORM_STORAGE_KEY);
+    const storageFormDataLogin = localStorage.getItem(LOGIN_FORM_STORAGE_KEY);
 
     if (storageFormDataLogin) {
       setFormData(JSON.parse(storageFormDataLogin));
     }
-    return false;
   }, []);
 
   const handleSubmit = (e) => {
@@ -26,7 +25,7 @@ export default function LoginForm() {
     const serializedLogin = JSON.stringify(formData);
 
     console.log(JSON.parse(serializedLogin));
-    sessionStorage.setItem(LOGIN_FORM_STORAGE_KEY, serializedLogin);
+    localStorage.setItem(LOGIN_FORM_STORAGE_KEY, serializedLogin);
   };
 
   return (
