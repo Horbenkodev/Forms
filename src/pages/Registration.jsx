@@ -17,8 +17,6 @@ export default function RegistrationForm() {
     if (storageFormDataReg) {
       setFormData(JSON.parse(storageFormDataReg));
     }
-
-    return false;
   }, []);
 
   const handleChange = (e) => {
@@ -183,7 +181,7 @@ export default function RegistrationForm() {
               id="color"
               type="color"
               name="color"
-              value={formData.color || ''}
+              value={formData.color || '#000000'}
               onChange={handleChange}
             />
 

@@ -1,0 +1,12 @@
+.users-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center
+}
+
+.user-block {
+  margin: 10px 0;
+  &_gender {
+    font-size: 15px;
+  }
+}

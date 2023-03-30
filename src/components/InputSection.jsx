@@ -7,8 +7,8 @@ export default function InputSection({
   name,
   type,
   value,
-  onChange,
-  inputClass = '',
+  onChange = () => {},
+  inputClass,
   labelClass,
   title,
 }) {
@@ -28,23 +28,17 @@ export default function InputSection({
 }
 
 InputSection.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   inputClass: PropTypes.string,
   labelClass: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 InputSection.defaultProps = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  inputClass: PropTypes.string,
-  labelClass: PropTypes.string,
-  title: PropTypes.string,
+  inputClass: '',
+  labelClass: '',
 };
