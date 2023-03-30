@@ -37278,6 +37278,9 @@ function LoginForm() {
     _useState2 = _slicedToArray(_useState, 2),
     formData = _useState2[0],
     setFormData = _useState2[1];
+  var historyBack = function historyBack() {
+    window.history.back();
+  };
   var handleChange = function handleChange(e) {
     var _e$target = e.target,
       name = _e$target.name,
@@ -37291,7 +37294,6 @@ function LoginForm() {
     if (storageFormDataLogin) {
       setFormData(JSON.parse(storageFormDataLogin));
     }
-    return false;
   }, []);
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
@@ -37323,12 +37325,16 @@ function LoginForm() {
     onChange: handleChange,
     labelClass: "lableLogin",
     inputClass: ""
-  }), /*#__PURE__*/_react.default.createElement("input", {
+  }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
+    className: "backBtn",
+    onClick: historyBack
+  }, "Back"), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
     value: "Submit",
     id: "submit"
-  })));
+  }))));
 }
 },{"react":"node_modules/react/index.js","../components/InputSection":"src/components/InputSection.jsx","../css/login.css":"src/css/login.css"}],"src/css/registration.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -37365,6 +37371,9 @@ function RegistrationForm() {
     _useState2 = _slicedToArray(_useState, 2),
     formData = _useState2[0],
     setFormData = _useState2[1];
+  var historyBack = function historyBack() {
+    window.history.back();
+  };
   (0, _react.useEffect)(function () {
     var storageFormDataReg = sessionStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
     if (storageFormDataReg) {
@@ -37612,11 +37621,19 @@ function RegistrationForm() {
     name: "subscribe",
     checked: formData.subscribe,
     onChange: handleChange
-  })))), /*#__PURE__*/_react.default.createElement("input", {
+  })))), /*#__PURE__*/_react.default.createElement("div", {
+    style: {
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
+    className: "backBtn",
+    onClick: historyBack
+  }, "Back"), /*#__PURE__*/_react.default.createElement("input", {
     className: "submit",
     type: "submit",
     value: "Register"
-  })));
+  }))));
 }
 },{"react":"node_modules/react/index.js","../components/InputSection":"src/components/InputSection.jsx","../css/registration.css":"src/css/registration.css"}],"src/components/App.jsx":[function(require,module,exports) {
 "use strict";
@@ -37684,7 +37701,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49257" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49358" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -27,7 +27,13 @@
 
 .submit {
   height: 30px;
-  width: 30%;
+}
+
+.backBtn {
+  border: none;
+  background: none;
+  color: blue;
+  cursor: pointer;
 }
 .regForm {
   width: 50%;
@@ -79,7 +85,6 @@
 
 .submit {
   height: 30px;
-  width: 30%;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;

@@ -7,6 +7,10 @@ const REGISTRATION_FORM_STORAGE_KEY = 'formData';
 export default function RegistrationForm() {
   const [formData, setFormData] = useState({});
 
+  const historyBack = () => {
+    window.history.back();
+  };
+
   useEffect(() => {
     const storageFormDataReg = sessionStorage.getItem(REGISTRATION_FORM_STORAGE_KEY);
 
@@ -300,9 +304,10 @@ export default function RegistrationForm() {
             </label>
           </fieldset>
         </div>
-
-        <input className="submit" type="submit" value="Register" />
-
+        <div style={{ margin: '0 auto' }}>
+          <button type="button" className="backBtn" onClick={historyBack}>Back</button>
+          <input className="submit" type="submit" value="Register" />
+        </div>
       </fieldset>
     </form>
   );

@@ -7,6 +7,10 @@ const LOGIN_FORM_STORAGE_KEY = 'formData';
 export default function LoginForm() {
   const [formData, setFormData] = useState({});
 
+  const historyBack = () => {
+    window.history.back();
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((values) => ({ ...values, [name]: value }));
@@ -18,7 +22,6 @@ export default function LoginForm() {
     if (storageFormDataLogin) {
       setFormData(JSON.parse(storageFormDataLogin));
     }
-    return false;
   }, []);
 
   const handleSubmit = (e) => {
@@ -53,8 +56,10 @@ export default function LoginForm() {
           labelClass="lableLogin"
           inputClass=""
         />
-
-        <input className="submit" type="submit" value="Submit" id="submit" />
+        <div>
+          <button type="button" className="backBtn" onClick={historyBack}>Back</button>
+          <input className="submit" type="submit" value="Submit" id="submit" />
+        </div>
       </fieldset>
     </form>
   );
