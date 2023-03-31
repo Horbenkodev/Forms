@@ -3,18 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Filters({
-  onChage,
+  onChangeTxt,
+  onChangeCheck,
 }) {
   return (
     <div className="users-filter">
-      <input onChange={onChage} type="text" placeholder="Enter name" />
+      <input onChange={onChangeTxt} type="text" placeholder="Enter name" />
       <div className="users-filter-gender">
         <div>
-          <input id="male" type="checkbox" />
+          <input id="male" type="checkbox" onChange={onChangeCheck} name="Male" />
           <label htmlFor="male">Male</label>
         </div>
         <div>
-          <input id="female" type="checkbox" />
+          <input id="female" type="checkbox" onChange={onChangeCheck} name="Female" />
           <label htmlFor="female">Female</label>
         </div>
       </div>
@@ -23,5 +24,6 @@ export default function Filters({
 }
 
 Filters.propTypes = {
-  onChage: PropTypes.func.isRequired,
+  onChangeTxt: PropTypes.func.isRequired,
+  onChangeCheck: PropTypes.func.isRequired,
 };
