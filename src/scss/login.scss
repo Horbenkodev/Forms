@@ -1,0 +1,28 @@
+.loginForm {
+  width: 20%;
+  margin: 0 auto;
+  &-fieldset {
+    display: flex;
+    flex-direction: column;
+    border: 1px black solid;
+    align-items: center;
+  }
+}
+
+.lableLogin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 5px 0;
+  text-transform: capitalize;
+}
+
+.submit {
+  height: 30px;
+}
+
+.backBtn {
+  border: none;
+  background: none;
+  color: blue;
+  cursor: pointer;
+}

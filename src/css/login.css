@@ -1,0 +1,37 @@
+.loginForm {
+  width: 20%;
+  margin: 0 auto;
+}
+.loginForm-fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px black solid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.lableLogin {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin: 5px 0;
+  text-transform: capitalize;
+}
+
+.submit {
+  height: 30px;
+}
+
+.backBtn {
+  border: none;
+  background: none;
+  color: blue;
+  cursor: pointer;
+}

@@ -1,0 +1,61 @@
+.regForm{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.mainFieldset {
+  border: 1px black solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.blockFieldset {
+  margin: 20px 0;
+  border: none;
+  border-bottom: 2px black solid;
+  &-legend {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.regLabel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  &-input {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.inputColor {
+  width: 100%;
+}
+
+.submit {
+  height: 30px;
+  align-self: center;
+}
+
+.gender {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin: 20px 0;
+  &-radio {
+    display: flex;
+    flex-direction: column;
+    &-label {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: start;
+      width: 150px;
+      cursor: pointer;
+    }
+  }
+}

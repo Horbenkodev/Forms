@@ -1,0 +1,146 @@
+.loginForm {
+  width: 20%;
+  margin: 0 auto;
+}
+.loginForm-fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px black solid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.lableLogin {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin: 5px 0;
+  text-transform: capitalize;
+}
+
+.submit {
+  height: 30px;
+}
+
+.backBtn {
+  border: none;
+  background: none;
+  color: blue;
+  cursor: pointer;
+}
+.regForm {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.mainFieldset {
+  display: -webkit-box;
+  display: flexbox;
+  display: flex;
+          flex-direction: column;
+  border: 1px black solid;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+}
+
+.blockFieldset {
+  margin: 20px 0;
+  border: none;
+  border-bottom: 2px black solid;
+}
+
+.blockFieldset-legend {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.regLabel {
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px 0;
+}
+
+.checkboxLabel {
+  display: -webkit-box;
+  display: flexbox;
+  display: flex;
+}
+
+.checkboxLabel-input {
+  width: 15px;
+  height: 15px;
+}
+
+.inputColor {
+  width: 100%;
+}
+
+.submit {
+      align-self: center;
+  height: 30px;
+  -ms-flex-item-align: center;
+      grid-row-align: center;
+}
+
+.gender {
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 20px 0;
+}
+
+.gender-radio {
+  display: -webkit-box;
+  display: flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+}
+
+.gender-radio-label {
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  justify-items: start;
+  width: 150px;
+  cursor: pointer;
+}
+.users-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.user-block {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-block_gender {
+  font-size: 15px;
+}
+
+.users-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.users-filter-gender {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=/src.a2b27638.css.map */
