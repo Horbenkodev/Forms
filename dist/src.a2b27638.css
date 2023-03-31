@@ -118,18 +118,29 @@
   cursor: pointer;
 }
 .users-content {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
 }
 
 .user-block {
   margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .user-block_gender {
   font-size: 15px;
+}
+
+.users-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.users-filter-gender {
+  display: flex;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=/src.a2b27638.css.map */
