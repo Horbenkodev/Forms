@@ -42689,29 +42689,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 function Filters(_ref) {
-  var onChage = _ref.onChage;
+  var onChangeTxt = _ref.onChangeTxt,
+    onChangeCheck = _ref.onChangeCheck;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "users-filter"
   }, /*#__PURE__*/_react.default.createElement("input", {
-    onChange: onChage,
+    onChange: onChangeTxt,
     type: "text",
     placeholder: "Enter name"
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "users-filter-gender"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
     id: "male",
-    type: "checkbox"
+    type: "checkbox",
+    onChange: onChangeCheck,
+    name: "Male"
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "male"
   }, "Male")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
     id: "female",
-    type: "checkbox"
+    type: "checkbox",
+    onChange: onChangeCheck,
+    name: "Female"
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "female"
   }, "Female"))));
 }
 Filters.propTypes = {
-  onChage: _propTypes.default.func.isRequired
+  onChangeTxt: _propTypes.default.func.isRequired,
+  onChangeCheck: _propTypes.default.func.isRequired
 };
 },{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"src/pages/Users.jsx":[function(require,module,exports) {
 "use strict";
@@ -42739,14 +42745,37 @@ function Users() {
     _useState2 = _slicedToArray(_useState, 2),
     searchText = _useState2[0],
     setSearchText = _useState2[1];
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    checkboxName = _useState4[0],
+    setCheckboxName = _useState4[1];
   var filteredUsers = function filteredUsers() {
+    if (searchText.length >= 3 && (checkboxName === 'Male' || 'Female')) {
+      return _users.default.filter(function (user) {
+        var lowerCasedName = user.name.toLowerCase();
+        return lowerCasedName.includes(searchText) && user.gender.includes(checkboxName);
+      });
+    }
     if (searchText.length >= 3) {
       return _users.default.filter(function (user) {
         var lowerCasedName = user.name.toLowerCase();
         return lowerCasedName.includes(searchText);
       });
     }
+    if (checkboxName === 'Male' || 'Female') {
+      return _users.default.filter(function (user) {
+        return user.gender.includes(checkboxName);
+      });
+    }
     return _users.default;
+  };
+  var handleCheck = function handleCheck(e) {
+    var checkboxValue = e.target.name;
+    if (e.target.checked === true) {
+      setCheckboxName(checkboxValue);
+    } else {
+      setCheckboxName('');
+    }
   };
   var handelSearch = function handelSearch(e) {
     var searchTextValue = e.target.value;
@@ -42755,7 +42784,8 @@ function Users() {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "users"
   }, /*#__PURE__*/_react.default.createElement(_Filters.default, {
-    onChage: handelSearch
+    onChangeTxt: handelSearch,
+    onChangeCheck: handleCheck
   }), /*#__PURE__*/_react.default.createElement("div", {
     className: "users-content"
   }, filteredUsers().map(function (user) {
@@ -42837,7 +42867,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49358" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49252" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
