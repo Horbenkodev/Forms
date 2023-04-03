@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 export default function UserItem({
@@ -6,9 +6,26 @@ export default function UserItem({
   avatar,
   gender,
 }) {
+  const ref = useRef(null);
+  const observer = useRef(null);
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver((entries) => {
+      entries.forEach((item) => {
+        if (item.isIntersecting) {
+          ref.current.src = ref.current.dataset.src;
+        }
+      });
+    });
+
+    if (ref.current) {
+      observer.current.observe(ref.current);
+    }
+  }, []);
+
   return (
-    <div className="user-block">
-      <img loading="lazy" src={avatar} alt={name} />
+    <div style={{ minHeight: '120px' }} className="user-block">
+      <img loading="lazy" ref={ref} data-src={avatar} alt={name} />
       <div className="user-block_name">{name}</div>
       <div className="user-block_gender">{gender}</div>
     </div>
