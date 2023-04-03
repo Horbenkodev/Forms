@@ -28911,6 +28911,7 @@ exports.defer = void 0;
 exports.generatePath = generatePath;
 exports.getStaticContextFromError = getStaticContextFromError;
 exports.getToPathname = getToPathname;
+exports.isDeferredData = isDeferredData;
 exports.isRouteErrorResponse = isRouteErrorResponse;
 exports.json = exports.joinPaths = void 0;
 exports.matchPath = matchPath;
@@ -28954,7 +28955,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symb
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 /**
- * @remix-run/router v1.4.0
+ * @remix-run/router v1.5.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -30352,7 +30353,11 @@ function createRouter(init) {
   var manifest = {}; // Routes in tree format for matching
 
   var dataRoutes = convertRoutesToDataRoutes(init.routes, detectErrorBoundary, undefined, manifest);
-  var inFlightDataRoutes; // Cleanup function for history
+  var inFlightDataRoutes; // Config driven behavior flags
+
+  var future = _extends({
+    v7_normalizeFormMethod: false
+  }, init.future); // Cleanup function for history
 
   var unlistenHistory = null; // Externally-provided functions to call on all state changes
 
@@ -30509,36 +30514,15 @@ function createRouter(init) {
         return;
       }
       return startNavigation(historyAction, location);
-    });
-    if (state.initialized) {
-      return router;
-    }
-    var lazyMatches = state.matches.filter(function (m) {
-      return m.route.lazy;
-    });
-    if (lazyMatches.length === 0) {
-      // Kick off initial data load if needed.  Use Pop to avoid modifying history
-      startNavigation(Action.Pop, state.location);
-      return router;
-    } // Load lazy modules, then kick off initial data load if needed
+    }); // Kick off initial data load if needed.  Use Pop to avoid modifying history
+    // Note we don't do any handling of lazy here.  For SPA's it'll get handled
+    // in the normal navigation flow.  For SSR it's expected that lazy modules are
+    // resolved prior to router creation since we can't go into a fallbackElement
+    // UI for SSR'd apps
 
-    var lazyPromises = lazyMatches.map(function (m) {
-      return loadLazyRouteModule(m.route, detectErrorBoundary, manifest);
-    });
-    Promise.all(lazyPromises).then(function () {
-      var initialized = !state.matches.some(function (m) {
-        return m.route.loader;
-      }) || init.hydrationData != null;
-      if (initialized) {
-        // We already have required loaderData so we can just set initialized
-        updateState({
-          initialized: true
-        });
-      } else {
-        // We still need to kick off initial data loads
-        startNavigation(Action.Pop, state.location);
-      }
-    });
+    if (!state.initialized) {
+      startNavigation(Action.Pop, state.location);
+    }
     return router;
   } // Clean up a router and it's side effects
 
@@ -30664,7 +30648,7 @@ function createRouter(init) {
             init.history.go(to);
             return _context2.abrupt("return");
           case 3:
-            _normalizeNavigateOpt2 = normalizeNavigateOptions(to, opts), path = _normalizeNavigateOpt2.path, submission = _normalizeNavigateOpt2.submission, error = _normalizeNavigateOpt2.error;
+            _normalizeNavigateOpt2 = normalizeNavigateOptions(to, future, opts), path = _normalizeNavigateOpt2.path, submission = _normalizeNavigateOpt2.submission, error = _normalizeNavigateOpt2.error;
             currentLocation = state.location;
             nextLocation = createLocation(state.location, path, opts && opts.state); // When using navigate as a PUSH/REPLACE we aren't reading an already-encoded
             // URL from window.location, so we need to encode it here so the behavior
@@ -30857,7 +30841,7 @@ function createRouter(init) {
             });
           case 35:
             _context3.next = 37;
-            return handleLoaders(request, location, matches, loadingNavigation, opts && opts.submission, opts && opts.replace, pendingActionData, pendingError);
+            return handleLoaders(request, location, matches, loadingNavigation, opts && opts.submission, opts && opts.fetcherSubmission, opts && opts.replace, pendingActionData, pendingError);
           case 37:
             _yield$handleLoaders = _context3.sent;
             shortCircuited = _yield$handleLoaders.shortCircuited;
@@ -30996,11 +30980,11 @@ function createRouter(init) {
     }));
     return _handleAction.apply(this, arguments);
   }
-  function handleLoaders(_x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20) {
+  function handleLoaders(_x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20, _x21) {
     return _handleLoaders.apply(this, arguments);
   }
   function _handleLoaders() {
-    _handleLoaders = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(request, location, matches, overrideNavigation, submission, replace, pendingActionData, pendingError) {
+    _handleLoaders = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(request, location, matches, overrideNavigation, submission, fetcherSubmission, replace, pendingActionData, pendingError) {
       var loadingNavigation, navigation, activeSubmission, routesToUse, _getMatchesToLoad, _getMatchesToLoad2, matchesToLoad, revalidatingFetchers, actionData, _yield$callLoadersAnd, results, loaderResults, fetcherResults, redirect, _processLoaderData, loaderData, errors, didAbortFetchLoads;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
@@ -31019,7 +31003,7 @@ function createRouter(init) {
               loadingNavigation = navigation;
             } // If this was a redirect from an action we don't have a "submission" but
             // we have it on the loading navigation so use that if available
-            activeSubmission = submission ? submission : loadingNavigation.formMethod && loadingNavigation.formAction && loadingNavigation.formData && loadingNavigation.formEncType ? {
+            activeSubmission = submission || fetcherSubmission ? submission || fetcherSubmission : loadingNavigation.formMethod && loadingNavigation.formAction && loadingNavigation.formData && loadingNavigation.formEncType ? {
               formMethod: loadingNavigation.formMethod,
               formAction: loadingNavigation.formAction,
               formData: loadingNavigation.formData,
@@ -31167,7 +31151,7 @@ function createRouter(init) {
       }));
       return;
     }
-    var _normalizeNavigateOpt = normalizeNavigateOptions(href, opts, true),
+    var _normalizeNavigateOpt = normalizeNavigateOptions(href, future, opts, true),
       path = _normalizeNavigateOpt.path,
       submission = _normalizeNavigateOpt.submission;
     var match = getTargetMatch(matches, path);
@@ -31185,7 +31169,7 @@ function createRouter(init) {
     handleFetcherLoader(key, routeId, path, match, matches, submission);
   } // Call the action for the matched fetcher.submit(), and then handle redirects,
   // errors, and revalidation
-  function handleFetcherAction(_x21, _x22, _x23, _x24, _x25, _x26) {
+  function handleFetcherAction(_x22, _x23, _x24, _x25, _x26, _x27) {
     return _handleFetcherAction.apply(this, arguments);
   } // Call the matched loader for fetcher.load(), handling redirects, errors, etc.
   function _handleFetcherAction() {
@@ -31255,6 +31239,7 @@ function createRouter(init) {
               fetchers: new Map(state.fetchers)
             });
             return _context6.abrupt("return", startRedirectNavigation(state, actionResult, {
+              submission: submission,
               isFetchActionRedirect: true
             }));
           case 26:
@@ -31382,7 +31367,7 @@ function createRouter(init) {
     }));
     return _handleFetcherAction.apply(this, arguments);
   }
-  function handleFetcherLoader(_x27, _x28, _x29, _x30, _x31, _x32) {
+  function handleFetcherLoader(_x28, _x29, _x30, _x31, _x32, _x33) {
     return _handleFetcherLoader.apply(this, arguments);
   }
   /**
@@ -31506,7 +31491,7 @@ function createRouter(init) {
     }));
     return _handleFetcherLoader.apply(this, arguments);
   }
-  function startRedirectNavigation(_x33, _x34, _x35) {
+  function startRedirectNavigation(_x34, _x35, _x36) {
     return _startRedirectNavigation.apply(this, arguments);
   }
   function _startRedirectNavigation() {
@@ -31574,10 +31559,32 @@ function createRouter(init) {
               preventScrollReset: pendingPreventScrollReset
             });
           case 17:
-            _context8.next = 21;
+            _context8.next = 26;
             break;
           case 19:
-            _context8.next = 21;
+            if (!isFetchActionRedirect) {
+              _context8.next = 24;
+              break;
+            }
+            _context8.next = 22;
+            return startNavigation(redirectHistoryAction, redirectLocation, {
+              overrideNavigation: {
+                state: "loading",
+                location: redirectLocation,
+                formMethod: undefined,
+                formAction: undefined,
+                formEncType: undefined,
+                formData: undefined
+              },
+              fetcherSubmission: submission,
+              // Preserve this flag across redirects
+              preventScrollReset: pendingPreventScrollReset
+            });
+          case 22:
+            _context8.next = 26;
+            break;
+          case 24:
+            _context8.next = 26;
             return startNavigation(redirectHistoryAction, redirectLocation, {
               overrideNavigation: {
                 state: "loading",
@@ -31590,7 +31597,7 @@ function createRouter(init) {
               // Preserve this flag across redirects
               preventScrollReset: pendingPreventScrollReset
             });
-          case 21:
+          case 26:
           case "end":
             return _context8.stop();
         }
@@ -31598,7 +31605,7 @@ function createRouter(init) {
     }));
     return _startRedirectNavigation.apply(this, arguments);
   }
-  function callLoadersAndMaybeResolveData(_x36, _x37, _x38, _x39, _x40) {
+  function callLoadersAndMaybeResolveData(_x37, _x38, _x39, _x40, _x41) {
     return _callLoadersAndMaybeResolveData.apply(this, arguments);
   }
   function _callLoadersAndMaybeResolveData() {
@@ -31940,7 +31947,7 @@ function createStaticHandler(routes, opts) {
    * propagate that out and return the raw Response so the HTTP server can
    * return it directly.
    */
-  function query(_x41, _x42) {
+  function query(_x42, _x43) {
     return _query.apply(this, arguments);
   }
   /**
@@ -31971,10 +31978,10 @@ function createStaticHandler(routes, opts) {
           case 0:
             _ref7 = _temp2 === void 0 ? {} : _temp2, requestContext = _ref7.requestContext;
             url = new URL(request.url);
-            method = request.method.toLowerCase();
+            method = request.method;
             location = createLocation("", createPath(url), null, "default");
             matches = matchRoutes(dataRoutes, location, basename); // SSR supports HEAD requests while SPA doesn't
-            if (!(!isValidMethod(method) && method !== "head")) {
+            if (!(!isValidMethod(method) && method !== "HEAD")) {
               _context10.next = 11;
               break;
             }
@@ -32038,7 +32045,7 @@ function createStaticHandler(routes, opts) {
     }));
     return _query.apply(this, arguments);
   }
-  function queryRoute(_x43, _x44) {
+  function queryRoute(_x44, _x45) {
     return _queryRoute.apply(this, arguments);
   }
   function _queryRoute() {
@@ -32049,10 +32056,10 @@ function createStaticHandler(routes, opts) {
           case 0:
             _ref8 = _temp3 === void 0 ? {} : _temp3, routeId = _ref8.routeId, requestContext = _ref8.requestContext;
             url = new URL(request.url);
-            method = request.method.toLowerCase();
+            method = request.method;
             location = createLocation("", createPath(url), null, "default");
             matches = matchRoutes(dataRoutes, location, basename); // SSR supports HEAD requests while SPA doesn't
-            if (!(!isValidMethod(method) && method !== "head" && method !== "options")) {
+            if (!(!isValidMethod(method) && method !== "HEAD" && method !== "OPTIONS")) {
               _context11.next = 9;
               break;
             }
@@ -32130,7 +32137,7 @@ function createStaticHandler(routes, opts) {
     }));
     return _queryRoute.apply(this, arguments);
   }
-  function queryImpl(_x45, _x46, _x47, _x48, _x49) {
+  function queryImpl(_x46, _x47, _x48, _x49, _x50) {
     return _queryImpl.apply(this, arguments);
   }
   function _queryImpl() {
@@ -32189,7 +32196,7 @@ function createStaticHandler(routes, opts) {
     }));
     return _queryImpl.apply(this, arguments);
   }
-  function submit(_x50, _x51, _x52, _x53, _x54) {
+  function submit(_x51, _x52, _x53, _x54, _x55) {
     return _submit.apply(this, arguments);
   }
   function _submit() {
@@ -32324,7 +32331,7 @@ function createStaticHandler(routes, opts) {
     }));
     return _submit.apply(this, arguments);
   }
-  function loadRouteData(_x55, _x56, _x57, _x58, _x59) {
+  function loadRouteData(_x56, _x57, _x58, _x59, _x60) {
     return _loadRouteData.apply(this, arguments);
   }
   function _loadRouteData() {
@@ -32427,7 +32434,7 @@ function isSubmissionNavigation(opts) {
 } // Normalize navigation options by converting formMethod=GET formData objects to
 // URLSearchParams so they behave identically to links with query params
 
-function normalizeNavigateOptions(to, opts, isFetcher) {
+function normalizeNavigateOptions(to, future, opts, isFetcher) {
   if (isFetcher === void 0) {
     isFetcher = false;
   }
@@ -32449,8 +32456,9 @@ function normalizeNavigateOptions(to, opts, isFetcher) {
 
   var submission;
   if (opts.formData) {
+    var formMethod = opts.formMethod || "get";
     submission = {
-      formMethod: opts.formMethod || "get",
+      formMethod: future.v7_normalizeFormMethod ? formMethod.toUpperCase() : formMethod.toLowerCase(),
       formAction: stripHashFromPath(path),
       formEncType: opts && opts.formEncType || "application/x-www-form-urlencoded",
       formData: opts.formData
@@ -32624,7 +32632,7 @@ function shouldRevalidateLoader(loaderMatch, arg) {
  * shouldRevalidate) and update the routeManifest in place which shares objects
  * with dataRoutes so those get updated as well.
  */
-function loadLazyRouteModule(_x60, _x61, _x62) {
+function loadLazyRouteModule(_x61, _x62, _x63) {
   return _loadLazyRouteModule.apply(this, arguments);
 }
 function _loadLazyRouteModule() {
@@ -32691,7 +32699,7 @@ function _loadLazyRouteModule() {
   }));
   return _loadLazyRouteModule.apply(this, arguments);
 }
-function callLoaderOrAction(_x63, _x64, _x65, _x66, _x67, _x68, _x69, _x70, _x71, _x72) {
+function callLoaderOrAction(_x64, _x65, _x66, _x67, _x68, _x69, _x70, _x71, _x72, _x73) {
   return _callLoaderOrAction.apply(this, arguments);
 } // Utility method for creating the Request instances for loaders/actions during
 // client-side navigations and fetches.  During SSR we will always have a
@@ -32905,7 +32913,7 @@ function _callLoaderOrAction() {
             error: result
           });
         case 71:
-          if (!(result instanceof DeferredData)) {
+          if (!isDeferredData(result)) {
             _context17.next = 73;
             break;
           }
@@ -32936,7 +32944,10 @@ function createClientSideRequest(history, location, signal, submission) {
   if (submission && isMutationMethod(submission.formMethod)) {
     var formMethod = submission.formMethod,
       formEncType = submission.formEncType,
-      formData = submission.formData;
+      formData = submission.formData; // Didn't think we needed this but it turns out unlike other methods, patch
+    // won't be properly normalized to uppercase and results in a 405 error.
+    // See: https://fetch.spec.whatwg.org/#concept-method
+
     init.method = formMethod.toUpperCase();
     init.body = formEncType === "application/x-www-form-urlencoded" ? convertFormDataToSearchParams(formData) : formData;
   } // Content-Type is inferred (https://fetch.spec.whatwg.org/#dom-request)
@@ -33191,6 +33202,10 @@ function isErrorResult(result) {
 function isRedirectResult(result) {
   return (result && result.type) === ResultType.redirect;
 }
+function isDeferredData(value) {
+  var deferred = value;
+  return deferred && _typeof(deferred) === "object" && _typeof(deferred.data) === "object" && typeof deferred.subscribe === "function" && typeof deferred.cancel === "function" && typeof deferred.resolveData === "function";
+}
 function isResponse(value) {
   return value != null && typeof value.status === "number" && typeof value.statusText === "string" && _typeof(value.headers) === "object" && typeof value.body !== "undefined";
 }
@@ -33206,12 +33221,12 @@ function isQueryRouteResponse(obj) {
   return obj && isResponse(obj.response) && (obj.type === ResultType.data || ResultType.error);
 }
 function isValidMethod(method) {
-  return validRequestMethods.has(method);
+  return validRequestMethods.has(method.toLowerCase());
 }
 function isMutationMethod(method) {
-  return validMutationMethods.has(method);
+  return validMutationMethods.has(method.toLowerCase());
 }
-function resolveDeferredResults(_x73, _x74, _x75, _x76, _x77, _x78) {
+function resolveDeferredResults(_x74, _x75, _x76, _x77, _x78, _x79) {
   return _resolveDeferredResults.apply(this, arguments);
 }
 function _resolveDeferredResults() {
@@ -33281,7 +33296,7 @@ function _resolveDeferredResults() {
   }));
   return _resolveDeferredResults.apply(this, arguments);
 }
-function resolveDeferredData(_x79, _x80, _x81) {
+function resolveDeferredData(_x80, _x81, _x82) {
   return _resolveDeferredData.apply(this, arguments);
 }
 function _resolveDeferredData() {
@@ -34808,14 +34823,14 @@ function createRoutesFromChildren(children, parentPath) {
       // conditionals in their route config.
       return;
     }
+    var treePath = [].concat(_toConsumableArray(parentPath), [index]);
     if (element.type === React.Fragment) {
       // Transparently support React.Fragment and its children.
-      routes.push.apply(routes, createRoutesFromChildren(element.props.children, parentPath));
+      routes.push.apply(routes, createRoutesFromChildren(element.props.children, treePath));
       return;
     }
     !(element.type === Route) ? "development" !== "production" ? (0, _router.UNSAFE_invariant)(false, "[" + (typeof element.type === "string" ? element.type : element.type.name) + "] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>") : (0, _router.UNSAFE_invariant)(false) : void 0;
     !(!element.props.index || !element.props.children) ? "development" !== "production" ? (0, _router.UNSAFE_invariant)(false, "An index route cannot have child routes.") : (0, _router.UNSAFE_invariant)(false) : void 0;
-    var treePath = [].concat(_toConsumableArray(parentPath), [index]);
     var route = {
       id: element.props.id || treePath.join("-"),
       caseSensitive: element.props.caseSensitive,
@@ -34862,6 +34877,7 @@ function detectErrorBoundary(route) {
 function createMemoryRouter(routes, opts) {
   return (0, _router.createRouter)({
     basename: opts == null ? void 0 : opts.basename,
+    future: opts == null ? void 0 : opts.future,
     history: (0, _router.createMemoryHistory)({
       initialEntries: opts == null ? void 0 : opts.initialEntries,
       initialIndex: opts == null ? void 0 : opts.initialIndex
@@ -35397,12 +35413,10 @@ function getFormSubmissionInfo(target, defaultAction, options) {
 var _excluded = ["onClick", "relative", "reloadDocument", "replace", "state", "target", "to", "preventScrollReset"],
   _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"],
   _excluded3 = ["reloadDocument", "replace", "method", "action", "onSubmit", "fetcherKey", "routeId", "relative", "preventScrollReset"];
-//#region Routers
-////////////////////////////////////////////////////////////////////////////////
-
 function createBrowserRouter(routes, opts) {
   return (0, _router.createRouter)({
     basename: opts == null ? void 0 : opts.basename,
+    future: opts == null ? void 0 : opts.future,
     history: (0, _router.createBrowserHistory)({
       window: opts == null ? void 0 : opts.window
     }),
@@ -35414,6 +35428,7 @@ function createBrowserRouter(routes, opts) {
 function createHashRouter(routes, opts) {
   return (0, _router.createRouter)({
     basename: opts == null ? void 0 : opts.basename,
+    future: opts == null ? void 0 : opts.future,
     history: (0, _router.createHashHistory)({
       window: opts == null ? void 0 : opts.window
     }),
@@ -37145,7 +37160,7 @@ if ("development" !== 'production') {
   // http://fb.me/prop-types-in-prod
   module.exports = require('./factoryWithThrowingShims')();
 }
-},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"../.nvm/versions/node/v18.15.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -37170,7 +37185,7 @@ function getBaseURL(url) {
 }
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../.nvm/versions/node/v18.15.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 function updateLink(link) {
   var newLink = link.cloneNode();
@@ -37196,11 +37211,11 @@ function reloadCSS() {
   }, 50);
 }
 module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/css/login.css":[function(require,module,exports) {
+},{"./bundle-url":"../.nvm/versions/node/v18.15.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/css/login.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/InputSection.jsx":[function(require,module,exports) {
+},{"_css_loader":"../.nvm/versions/node/v18.15.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/InputSection.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37340,7 +37355,7 @@ function LoginForm() {
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/pages/Registration.jsx":[function(require,module,exports) {
+},{"_css_loader":"../.nvm/versions/node/v18.15.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/pages/Registration.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42636,7 +42651,58 @@ module.exports = [{
   "gender": "Male",
   "avatar": "https://robohash.org/corruptioccaecativoluptatem.bmp?size=75x75&set=set1"
 }];
-},{}],"src/scss/user.scss":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+  return bundleURL;
+}
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+    cssTimeout = null;
+  }, 50);
+}
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/css/user.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
@@ -42770,7 +42836,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = Users;
 var _react = _interopRequireWildcard(require("react"));
 var _users = _interopRequireDefault(require("../data/users.json"));
-require("../scss/user.scss");
+require("../css/user.css");
 var _Filters = _interopRequireDefault(require("../components/Filters"));
 var _UserPlaceholder = _interopRequireDefault(require("../components/UserPlaceholder"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -42800,6 +42866,11 @@ function Users() {
     _useState4 = _slicedToArray(_useState3, 2),
     checkboxName = _useState4[0],
     setCheckboxName = _useState4[1];
+  var _useState5 = (0, _react.useState)(1),
+    _useState6 = _slicedToArray(_useState5, 2),
+    currentPage = _useState6[0],
+    setCurrentPage = _useState6[1];
+  var usersPerPage = 20;
   var filteredUsers = function filteredUsers() {
     if (searchText.length >= 3 && (checkboxName.Male || checkboxName.Female)) {
       var gender;
@@ -42837,6 +42908,18 @@ function Users() {
     }
     return _users.default;
   };
+  var paginationUsers = function paginationUsers() {
+    var filteredList = filteredUsers();
+    var lastUser = currentPage * usersPerPage;
+    var firstUser = lastUser - usersPerPage;
+    return filteredList.slice(firstUser, lastUser);
+  };
+  var nextPage = function nextPage() {
+    setCurrentPage(currentPage + 1);
+  };
+  var prevPage = function prevPage() {
+    setCurrentPage(currentPage - 1);
+  };
   var handleCheck = function handleCheck(e) {
     var checkboxValue = e.target.name;
     if (e.target.checked === true) {
@@ -42850,6 +42933,7 @@ function Users() {
     var searchTextValue = e.target.value;
     setSearchText(searchTextValue.toLowerCase());
   };
+  console.log(filteredUsers().length / usersPerPage);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "users"
   }, /*#__PURE__*/_react.default.createElement(_Filters.default, {
@@ -42859,16 +42943,26 @@ function Users() {
     fallback: /*#__PURE__*/_react.default.createElement(_UserPlaceholder.default, null)
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "users-content"
-  }, filteredUsers().map(function (user) {
+  }, paginationUsers().map(function (user) {
     return /*#__PURE__*/_react.default.createElement(UserItem, {
       key: user.id,
       avatar: user.avatar,
       gender: user.gender,
       name: user.name
     });
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "paginationBtn"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
+    onClick: prevPage,
+    disabled: currentPage === 1
+  }, "Prev"), /*#__PURE__*/_react.default.createElement("button", {
+    type: "button",
+    onClick: nextPage,
+    disabled: currentPage === Math.ceil(filteredUsers().length / usersPerPage)
+  }, "Next")));
 }
-},{"react":"node_modules/react/index.js","../data/users.json":"src/data/users.json","../scss/user.scss":"src/scss/user.scss","../components/Filters":"src/components/Filters.jsx","../components/UserPlaceholder":"src/components/UserPlaceholder.jsx","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","../components/UserItem":[["UserItem.f21c1f0c.js","src/components/UserItem.jsx"],"UserItem.f21c1f0c.js.map","src/components/UserItem.jsx"]}],"src/components/App.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../data/users.json":"src/data/users.json","../css/user.css":"src/css/user.css","../components/Filters":"src/components/Filters.jsx","../components/UserPlaceholder":"src/components/UserPlaceholder.jsx","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","../components/UserItem":[["UserItem.f21c1f0c.js","src/components/UserItem.jsx"],"UserItem.f21c1f0c.js.map","src/components/UserItem.jsx"]}],"src/components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42938,7 +43032,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49252" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64348" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
