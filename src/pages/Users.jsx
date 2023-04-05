@@ -57,6 +57,8 @@ export default function Users() {
     const filteredList = filteredUsers();
     const lastUser = currentPage * usersPerPage;
     const firstUser = lastUser - usersPerPage;
+    console.log(filteredList.slice(firstUser, lastUser));
+
     return filteredList.slice(firstUser, lastUser);
   };
 

@@ -42912,6 +42912,7 @@ function Users() {
     var filteredList = filteredUsers();
     var lastUser = currentPage * usersPerPage;
     var firstUser = lastUser - usersPerPage;
+    console.log(filteredList.slice(firstUser, lastUser));
     return filteredList.slice(firstUser, lastUser);
   };
   var nextPage = function nextPage() {
@@ -42962,7 +42963,7 @@ function Users() {
     disabled: currentPage === Math.ceil(filteredUsers().length / usersPerPage)
   }, "Next")));
 }
-},{"react":"node_modules/react/index.js","../data/users.json":"src/data/users.json","../css/user.css":"src/css/user.css","../components/Filters":"src/components/Filters.jsx","../components/UserPlaceholder":"src/components/UserPlaceholder.jsx","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","../components/UserItem":[["UserItem.f21c1f0c.js","src/components/UserItem.jsx"],"UserItem.f21c1f0c.js.map","src/components/UserItem.jsx"]}],"src/components/App.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../data/users.json":"src/data/users.json","../css/user.css":"src/css/user.css","../components/Filters":"src/components/Filters.jsx","../components/UserPlaceholder":"src/components/UserPlaceholder.jsx","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","../components/UserItem":[["UserItem.f21c1f0c.js","src/components/UserItem.jsx"],"UserItem.f21c1f0c.js.map",["Spinner.d9a5d410.gif","src/img/Spinner.gif"],"src/components/UserItem.jsx"]}],"src/components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43032,7 +43033,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64348" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49244" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
