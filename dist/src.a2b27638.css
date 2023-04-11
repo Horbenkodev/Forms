@@ -2,25 +2,21 @@
   width: 20%;
   margin: 0 auto;
 }
+
 .loginForm-fieldset {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
+          flex-direction: column;
+          align-items: center;
+  border: 1px black solid;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  border: 1px black solid;
   -webkit-box-align: center;
       -ms-flex-align: center;
-          align-items: center;
 }
 
-.lableLogin {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+.labelLogin {
   margin: 5px 0;
   text-transform: capitalize;
 }
@@ -29,11 +25,15 @@
   height: 30px;
 }
 
+.btnBlock {
+  margin: 10px 0;
+}
+
 .backBtn {
-  border: none;
-  background: none;
   color: blue;
   cursor: pointer;
+  background: none;
+  border: none;
 }
 .regForm {
   width: 50%;
