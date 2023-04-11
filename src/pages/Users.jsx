@@ -57,7 +57,6 @@ export default function Users() {
     const filteredList = filteredUsers();
     const lastUser = currentPage * usersPerPage;
     const firstUser = lastUser - usersPerPage;
-    console.log(filteredList.slice(firstUser, lastUser));
 
     return filteredList.slice(firstUser, lastUser);
   };
@@ -85,7 +84,6 @@ export default function Users() {
     setSearchText(searchTextValue.toLowerCase());
   };
 
-  console.log(filteredUsers().length / usersPerPage);
   return (
     <div className="users">
 
