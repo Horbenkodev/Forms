@@ -37,3 +37,7 @@
   background: none;
   border: none;
 }
+
+.errorMessage {
+  color: red;
+}

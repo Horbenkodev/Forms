@@ -42381,20 +42381,24 @@ function LoginForm() {
       setFormData(JSON.parse(storageFormDataLogin));
     }
   }, []);
-
-  // const validate = (values) => {
-  //   const errors = {};
-  //   if (values.login === '') {
-  //     errors.login = 'Required';
-  //   }
-  //   return errors;
-  // };
-
+  var validate = function validate() {
+    var errors = {};
+    if (!formData.login) {
+      errors.login = 'Required';
+    }
+    if (!formData.password) {
+      errors.password = 'Required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Minimum 6 characters';
+    }
+    return errors;
+  };
   return /*#__PURE__*/_react.default.createElement(_formik.Formik, {
     initialValues: {
-      login: '',
-      password: ''
+      login: formData.login,
+      password: formData.login
     },
+    validate: validate,
     onSubmit: function onSubmit() {
       var serializedLogin = JSON.stringify(formData);
       console.log(JSON.parse(serializedLogin));
@@ -42412,23 +42416,37 @@ function LoginForm() {
       htmlFor: "login",
       className: "labelLogin"
     }, "Login", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.login && touched.login ? 'red' : null)
+      },
       title: "Login",
       name: "login",
       id: "login",
       type: "text",
       value: formData.login || '',
       onChange: handleChange
-    }), errors.login && touched.login && /*#__PURE__*/_react.default.createElement("div", null, errors.login)), /*#__PURE__*/_react.default.createElement("label", {
+    })), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "login"
+    }), /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: "password",
       className: "labelLogin"
     }, "Password", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.password && touched.password ? 'red' : null)
+      },
       title: "Password",
       name: "password",
       id: "password",
       type: "password",
       value: formData.password || '',
       onChange: handleChange
-    }), errors.password ? /*#__PURE__*/_react.default.createElement("div", null, errors.password) : null), /*#__PURE__*/_react.default.createElement("div", {
+    })), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "password"
+    }), /*#__PURE__*/_react.default.createElement("div", {
       className: "btnBlock"
     }, /*#__PURE__*/_react.default.createElement("button", {
       type: "button",
@@ -42618,7 +42636,7 @@ function RegistrationForm() {
       htmlFor: "city"
     }, "City", /*#__PURE__*/_react.default.createElement(_formik.Field, {
       value: formData.city || '',
-      list: "city",
+      list: "cities",
       id: "city",
       name: "city",
       onChange: handleChange
@@ -48844,7 +48862,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61023" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49237" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

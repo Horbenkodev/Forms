@@ -37,6 +37,10 @@
   background: none;
   border: none;
 }
+
+.errorMessage {
+  color: red;
+}
 .regForm {
   width: 50%;
   margin: 0 auto;
