@@ -42508,6 +42508,9 @@ function RegistrationForm() {
     if (!formData.surname) {
       errors.surname = 'Required';
     }
+    if (!formData.gender) {
+      errors.gender = 'Required';
+    }
     if (!formData.date) {
       errors.date = 'Required';
     }
@@ -42617,7 +42620,8 @@ function RegistrationForm() {
       type: "radio",
       value: "male",
       checked: formData.gender === 'male',
-      onChange: handleChange
+      onChange: handleChange,
+      required: !formData.gender
     })), /*#__PURE__*/_react.default.createElement("label", {
       className: "gender-radio-label",
       htmlFor: "female"
@@ -48930,7 +48934,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64180" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

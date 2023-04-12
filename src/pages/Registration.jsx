@@ -31,6 +31,9 @@ export default function RegistrationForm() {
     if (!formData.surname) {
       errors.surname = 'Required';
     }
+    if (!formData.gender) {
+      errors.gender = 'Required';
+    }
     if (!formData.date) {
       errors.date = 'Required';
     }
@@ -134,6 +137,7 @@ export default function RegistrationForm() {
                         value="male"
                         checked={formData.gender === 'male'}
                         onChange={handleChange}
+                        required={!formData.gender}
                       />
                     </label>
 
