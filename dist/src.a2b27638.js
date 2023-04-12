@@ -42417,7 +42417,7 @@ function LoginForm() {
       className: "labelLogin"
     }, "Login", /*#__PURE__*/_react.default.createElement(_formik.Field, {
       style: {
-        border: "1px solid  ".concat(errors.login && touched.login ? 'red' : null)
+        border: "1px solid  ".concat(errors.login && touched.login ? 'red' : '')
       },
       title: "Login",
       name: "login",
@@ -42434,7 +42434,7 @@ function LoginForm() {
       className: "labelLogin"
     }, "Password", /*#__PURE__*/_react.default.createElement(_formik.Field, {
       style: {
-        border: "1px solid  ".concat(errors.password && touched.password ? 'red' : null)
+        border: "1px solid  ".concat(errors.password && touched.password ? 'red' : '')
       },
       title: "Password",
       name: "password",
@@ -42500,6 +42500,32 @@ function RegistrationForm() {
       setFormData(JSON.parse(storageFormDataReg));
     }
   }, []);
+  var validate = function validate() {
+    var errors = {};
+    if (!formData.name) {
+      errors.name = 'Required';
+    }
+    if (!formData.surname) {
+      errors.surname = 'Required';
+    }
+    if (!formData.date) {
+      errors.date = 'Required';
+    }
+    if (!formData.password) {
+      errors.password = 'Required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Minimum 6 characters';
+    }
+    if (formData.repeatpassword !== formData.password) {
+      errors.repeatpassword = 'Passwords don\'t match';
+    }
+    if (!formData.email) {
+      errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)) {
+      errors.email = 'Invalid email address';
+    }
+    return errors;
+  };
   var handleChange = function handleChange(e) {
     var _e$target = e.target,
       name = _e$target.name,
@@ -42528,7 +42554,9 @@ function RegistrationForm() {
       email: '',
       subscribe: false
     },
+    validate: validate,
     onSubmit: function onSubmit() {
+      console.log(formData.date);
       var serializedReg = JSON.stringify(formData);
       console.log(JSON.parse(serializedReg));
       sessionStorage.setItem(REGISTRATION_FORM_STORAGE_KEY, serializedReg);
@@ -42548,23 +42576,35 @@ function RegistrationForm() {
       htmlFor: "name",
       className: "regLabel"
     }, "Name", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.name && touched.name ? 'red' : '')
+      },
       id: "name",
       name: "name",
       type: "text",
       value: formData.name || '',
-      onChange: handleChange,
-      required: true
-    }), /*#__PURE__*/_react.default.createElement("div", null, "* John"), errors.login && touched.login && /*#__PURE__*/_react.default.createElement("div", null, errors.login)), /*#__PURE__*/_react.default.createElement("label", {
+      onChange: handleChange
+    }), /*#__PURE__*/_react.default.createElement("div", null, "* John")), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "name"
+    }), /*#__PURE__*/_react.default.createElement("label", {
       className: "regLabel",
       htmlFor: "surname"
     }, "Surname", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.surname && touched.surname ? 'red' : '')
+      },
       id: "surname",
       name: "surname",
       type: "text",
       value: formData.surname || '',
-      onChange: handleChange,
-      required: true
-    }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement("div", {
+      onChange: handleChange
+    }), /*#__PURE__*/_react.default.createElement("div", null, "* Doe")), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "surname"
+    }), /*#__PURE__*/_react.default.createElement("div", {
       className: "gender"
     }, /*#__PURE__*/_react.default.createElement("div", null, "Gender"), /*#__PURE__*/_react.default.createElement("div", {
       className: "gender-radio"
@@ -42602,13 +42642,20 @@ function RegistrationForm() {
       className: "regLabel",
       htmlFor: "date"
     }, "Date of birth", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.date && touched.date ? 'red' : '')
+      },
       id: "date",
       type: "date",
       name: "date",
       value: formData.date || '',
       onChange: handleChange,
       required: true
-    }), /*#__PURE__*/_react.default.createElement("div", null, "* 01/01/1900"))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    }), /*#__PURE__*/_react.default.createElement("div", null, "* 01/01/1900")), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "date"
+    })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
       className: "blockFieldset"
     }, /*#__PURE__*/_react.default.createElement("legend", {
       className: "blockFieldset-legend"
@@ -42622,7 +42669,7 @@ function RegistrationForm() {
       value: formData.country || '',
       onChange: handleChange
     }, /*#__PURE__*/_react.default.createElement("option", {
-      value: "select"
+      value: ""
     }, "Select"), /*#__PURE__*/_react.default.createElement("option", {
       value: "ukraine"
     }, "Ukraine"), /*#__PURE__*/_react.default.createElement("option", {
@@ -42725,30 +42772,51 @@ function RegistrationForm() {
       className: "regLabel",
       htmlFor: "password"
     }, "Password", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.password && touched.password ? 'red' : '')
+      },
       id: "password",
       type: "password",
       name: "password",
       onChange: handleChange,
       value: formData.password || ''
-    })), /*#__PURE__*/_react.default.createElement("label", {
+    })), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "password"
+    }), /*#__PURE__*/_react.default.createElement("label", {
       className: "regLabel",
       htmlFor: "repeatPassword"
     }, "Repeat Password", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.repeatpassword && touched.repeatpassword ? 'red' : '')
+      },
       id: "repeatPassword",
       type: "password",
       name: "repeatpassword",
       onChange: handleChange,
       value: formData.repeatpassword || ''
-    })), /*#__PURE__*/_react.default.createElement("label", {
+    })), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "repeatpassword"
+    }), /*#__PURE__*/_react.default.createElement("label", {
       className: "regLabel",
       htmlFor: "email"
     }, "Email", /*#__PURE__*/_react.default.createElement(_formik.Field, {
+      style: {
+        border: "1px solid  ".concat(errors.email && touched.email ? 'red' : '')
+      },
       id: "email",
       type: "email",
       name: "email",
       onChange: handleChange,
       value: formData.email || ''
-    })))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
+    })), /*#__PURE__*/_react.default.createElement(_formik.ErrorMessage, {
+      className: "errorMessage",
+      component: "div",
+      name: "email"
+    }))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
       className: "blockFieldset"
     }, /*#__PURE__*/_react.default.createElement("legend", {
       className: "blockFieldset-legend"

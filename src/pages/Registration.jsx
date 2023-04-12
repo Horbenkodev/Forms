@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import '../css/registration.css';
-import { Field, Form, Formik } from 'formik';
+import {
+  ErrorMessage, Field, Form, Formik,
+} from 'formik';
 
 const REGISTRATION_FORM_STORAGE_KEY = 'formData';
 
@@ -19,6 +21,34 @@ export default function RegistrationForm() {
       setFormData(JSON.parse(storageFormDataReg));
     }
   }, []);
+
+  const validate = () => {
+    const errors = {};
+
+    if (!formData.name) {
+      errors.name = 'Required';
+    }
+    if (!formData.surname) {
+      errors.surname = 'Required';
+    }
+    if (!formData.date) {
+      errors.date = 'Required';
+    }
+    if (!formData.password) {
+      errors.password = 'Required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Minimum 6 characters';
+    }
+    if (formData.repeatpassword !== formData.password) {
+      errors.repeatpassword = 'Passwords don\'t match';
+    }
+    if (!formData.email) {
+      errors.email = 'Required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email)) {
+      errors.email = 'Invalid email address';
+    }
+    return errors;
+  };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -46,7 +76,9 @@ export default function RegistrationForm() {
         email: '',
         subscribe: false,
       }}
+      validate={validate}
       onSubmit={() => {
+        console.log(formData.date);
         const serializedReg = JSON.stringify(formData);
 
         console.log(JSON.parse(serializedReg));
@@ -64,30 +96,30 @@ export default function RegistrationForm() {
                 <label htmlFor="name" className="regLabel">
                   Name
                   <Field
+                    style={{ border: `1px solid  ${errors.name && touched.name ? 'red' : ''}` }}
                     id="name"
                     name="name"
                     type="text"
                     value={formData.name || ''}
                     onChange={handleChange}
-                    required
                   />
                   <div>* John</div>
-                  {errors.login && touched.login && (<div>{errors.login}</div>)}
-
                 </label>
+                <ErrorMessage className="errorMessage" component="div" name="name" />
 
                 <label className="regLabel" htmlFor="surname">
                   Surname
                   <Field
+                    style={{ border: `1px solid  ${errors.surname && touched.surname ? 'red' : ''}` }}
                     id="surname"
                     name="surname"
                     type="text"
                     value={formData.surname || ''}
                     onChange={handleChange}
-                    required
                   />
                   <div>* Doe</div>
                 </label>
+                <ErrorMessage className="errorMessage" component="div" name="surname" />
 
                 <div className="gender">
                   <div>Gender</div>
@@ -135,6 +167,7 @@ export default function RegistrationForm() {
                   <label className="regLabel" htmlFor="date">
                     Date of birth
                     <Field
+                      style={{ border: `1px solid  ${errors.date && touched.date ? 'red' : ''}` }}
                       id="date"
                       type="date"
                       name="date"
@@ -144,6 +177,8 @@ export default function RegistrationForm() {
                     />
                     <div>* 01/01/1900</div>
                   </label>
+                  <ErrorMessage className="errorMessage" component="div" name="date" />
+
                 </div>
               </fieldset>
             </div>
@@ -162,7 +197,7 @@ export default function RegistrationForm() {
                       value={formData.country || ''}
                       onChange={handleChange}
                     >
-                      <option value="select">Select</option>
+                      <option value="">Select</option>
                       <option value="ukraine">Ukraine</option>
                       <option value="poland">Poland</option>
                       <option value="usa">USA</option>
@@ -176,7 +211,7 @@ export default function RegistrationForm() {
                     City
                     <Field
                       value={formData.city || ''}
-                      list="city"
+                      list="cities"
                       id="city"
                       name="city"
                       onChange={handleChange}
@@ -278,6 +313,7 @@ export default function RegistrationForm() {
                 <label className="regLabel" htmlFor="password">
                   Password
                   <Field
+                    style={{ border: `1px solid  ${errors.password && touched.password ? 'red' : ''}` }}
                     id="password"
                     type="password"
                     name="password"
@@ -285,10 +321,12 @@ export default function RegistrationForm() {
                     value={formData.password || ''}
                   />
                 </label>
+                <ErrorMessage className="errorMessage" component="div" name="password" />
 
                 <label className="regLabel" htmlFor="repeatPassword">
                   Repeat Password
                   <Field
+                    style={{ border: `1px solid  ${errors.repeatpassword && touched.repeatpassword ? 'red' : ''}` }}
                     id="repeatPassword"
                     type="password"
                     name="repeatpassword"
@@ -296,10 +334,12 @@ export default function RegistrationForm() {
                     value={formData.repeatpassword || ''}
                   />
                 </label>
+                <ErrorMessage className="errorMessage" component="div" name="repeatpassword" />
 
                 <label className="regLabel" htmlFor="email">
                   Email
                   <Field
+                    style={{ border: `1px solid  ${errors.email && touched.email ? 'red' : ''}` }}
                     id="email"
                     type="email"
                     name="email"
@@ -307,6 +347,8 @@ export default function RegistrationForm() {
                     value={formData.email || ''}
                   />
                 </label>
+                <ErrorMessage className="errorMessage" component="div" name="email" />
+
               </fieldset>
             </div>
 
