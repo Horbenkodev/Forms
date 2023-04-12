@@ -63,7 +63,7 @@ export default function LoginForm() {
             <label htmlFor="login" className="labelLogin">
               Login
               <Field
-                style={{ border: `1px solid  ${errors.login && touched.login ? 'red' : null}` }}
+                style={{ border: `1px solid  ${errors.login && touched.login ? 'red' : ''}` }}
                 title="Login"
                 name="login"
                 id="login"
@@ -77,7 +77,7 @@ export default function LoginForm() {
             <label htmlFor="password" className="labelLogin">
               Password
               <Field
-                style={{ border: `1px solid  ${errors.password && touched.password ? 'red' : null}` }}
+                style={{ border: `1px solid  ${errors.password && touched.password ? 'red' : ''}` }}
                 title="Password"
                 name="password"
                 id="password"
